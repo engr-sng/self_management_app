@@ -1,24 +1,41 @@
-# README
+# SelfManagementApp
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アプリ概要
+### アプリテーマ
+SelgManagementAppは、個人の目標管理を一箇所にまとめる記録アプリです。<br>
+プロジェクト管理機能、プロジェクトアサイン機能、タスク管理機能、ガントチャート機能など、個人が目標を達成するために必要な機能を利用することができます。
 
-Things you may want to cover:
+### テーマを選んだ理由
+BacklogやRedmine、Wrikeなど組織でタスク管理やプロジェクト管理をするツールはたくさんあります。<br>
+しかし、個人で利用するにはコストも高くオーバースペックなことが多いです。<br>
+<br>
+近年では個人で仕事をする人が増加している背景もあるため、<br>
+個人向けの目標管理ツールにより、プロジェクト達成をサポートできるサービスがあれば便利だと考え、こちらのテーマにしました。<br>
 
-* Ruby version
+### ターゲットユーザ
+- 個人で仕事をしている個人ユーザー
 
-* System dependencies
+### 主な利用シーン
+- プロジェクト達成に必要なタスク管理や進捗管理
+- 複数人が関わるプロジェクトの共有
 
-* Configuration
+## 設計書
+### ER図
+※作成中※
 
-* Database creation
+### テーブル設計書
+※作成中※
 
-* Database initialization
+### アプリケーション詳細設計書
+※作成中※
 
-* How to run the test suite
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- Gem：devise,enum_help,Active Storage
+- JSライブラリ：jQuery,Chart.js
+- IDE：Cloud9
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+- FontAwesome(https://fontawesome.com/)
