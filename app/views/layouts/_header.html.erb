@@ -1,0 +1,18 @@
+へっだーだよん
+
+<% if user_signed_in? %>
+ようこそユーザー<%= current_user.user_name %>さん
+<% end %>
+
+<% if admin_signed_in? %>
+ようこそ管理者<%= current_admin.user_name %>さん
+<% end %>
+
+<h2>ユーザーのヘッダー</h2>
+<%= link_to "新規登録", new_user_registration_path, method: :get %>
+<%= link_to "ログイン", new_user_session_path, method: :get %>
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+<h2>管理者のヘッダー</h2>
+<%= link_to "ログイン", new_admin_session_path, method: :get %>
+<%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
