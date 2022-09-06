@@ -1,0 +1,98 @@
+/* 全体的に適用 */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+/* 共通レイアウト */
+
+body {
+  font-size: 12px;
+  color: #333333;
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN";
+}
+
+/* ヘッダー */
+
+.header-wrapper {
+    background-color: #000000;
+}
+
+.header-container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-flex-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.header-left {
+  padding: 0 0 0 0;
+  color: #FFFFFF;
+}
+
+.header-right {
+  padding: 0 0 0 0;
+  color: #FFFFFF;
+}
+
+.header-logo {
+  display: inline-block;
+  line-height: 60px;
+}
+
+.nav-list {
+
+}
+
+.nav-list-item {
+  display: inline-block;
+  line-height: 60px;
+  list-style-type: none;
+  padding: 0 25px 0 25px;
+}
+
+/* コンテンツ */
+
+.wrapper {
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.flex-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-box-30 {
+  width: 30%;
+  padding: 20px 10px;
+}
+
+.flex-box-40 {
+  width: 40%;
+  padding: 20px 10px;
+}
+
+.flex-box > flex-box-30:nth-child(3n+2) {
+  margin: 0 5%;
+}
+
+.flex-box > flex-box-24:nth-child(2n) {
+  margin: 0 0 0 20%;
+}
+
+
+
