@@ -13,6 +13,7 @@
           <tr>
             <th>WBS</th>
             <th>タスク</th>
+            <th>タスクの説明</th>
             <th>開始日</th>
             <th>終了日</th>
             <th>ステータス</th>
@@ -29,6 +30,7 @@
           <tr class="milestone-color">
             <td><%= milestone.display_order %></td>
             <td><%= milestone.title %></td>
+            <td><%= milestone.description %></td>
             <td><%= milestone.start_date.strftime("%Y/%m/%d") %></td>
             <td><%= milestone.end_date.strftime("%Y/%m/%d") %></td>
             <td><%= milestone.status %></td>
@@ -42,6 +44,7 @@
             <tr class="parent_task-color">
               <td><%= milestone.display_order %>-<%= parent_task.display_order %></td>
               <td><%= parent_task.title %></td>
+              <td><%= parent_task.description %></td>
               <td><%= parent_task.start_date.strftime("%Y/%m/%d") %></td>
               <td><%= parent_task.end_date.strftime("%Y/%m/%d") %></td>
               <td><%= parent_task.status %></td>
@@ -55,6 +58,7 @@
               <tr class="child_task-color">
                 <td><%= milestone.display_order %>-<%= parent_task.display_order %>-<%= child_task.display_order %></td>
                 <td><%= child_task.title %></td>
+                <td><%= child_task.description %></td>
                 <td><%= child_task.start_date.strftime("%Y/%m/%d") %></td>
                 <td><%= child_task.end_date.strftime("%Y/%m/%d") %></td>
                 <td><%= child_task.status %></td>

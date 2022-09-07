@@ -195,8 +195,10 @@ body {
 }
 
 .gantt-chart > tbody > tr > td {
-  text-align: center;
   padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .gantt-chart > thead > tr > th:nth-child(1) {
@@ -207,16 +209,20 @@ body {
   width: 200px;
 }
 
-.gantt-chart > thead > tr > th:nth-child(n+3):nth-child(-n+7) {
+.gantt-chart > thead > tr > th:nth-child(3) {
+  width: 300px;
+}
+
+.gantt-chart > thead > tr > th:nth-child(n+4):nth-child(-n+8) {
   width: 100px;
 }
 
-.gantt-chart > thead > tr > th:nth-child(n+8) {
+.gantt-chart > thead > tr > th:nth-child(n+9) {
   width: 60px;
 }
 
-.gantt-chart > tbody > tr {
-  border-bottom: solid 1px #eeeeee;
+.gantt-chart > tbody > tr > td {
+  border: solid 1px #eeeeee;
   cursor: pointer;
 }
 
