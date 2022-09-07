@@ -4,6 +4,7 @@ class Public::ProjectsController < ApplicationController
   end
 
   def show
+    @project = Project.find(params[:id])
   end
 
   def new
@@ -16,6 +17,7 @@ class Public::ProjectsController < ApplicationController
     @project_new.user_id = current_user.id
     if  @project_new.save
       @project_new.initial_project_member
+      @project_new.initial_project_format
       redirect_to project_path(@project_new.id)
       flash[:notice] = "プロジェクトの新規作成に成功しました。"
     else

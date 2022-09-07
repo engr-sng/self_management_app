@@ -1,1 +1,23 @@
-<h2>プロジェクトの詳細</h2>
+<div class="wrapper">
+  <div class="container">
+
+    <h2>プロジェクトの詳細</h2>
+      <p>プロジェクトID：<%= @project.id %></p>
+      <p>プロジェクト名：<%= @project.title %></p>
+      <p>プロジェクトオーナー：<%= @project.user.display_name %></p>
+
+      <% @project.milestones.each do |milestone| %>
+        <p><%= milestone.title %></p>
+
+          <% milestone.parent_tasks.each do |parent_task| %>
+            <p><%= parent_task.title %></p>
+
+            <% parent_task.child_tasks.each do |child_task| %>
+              <p><%= child_task.title %></p>
+            <% end %>
+
+          <% end %>
+      <% end %>
+
+  </div>
+</div>
