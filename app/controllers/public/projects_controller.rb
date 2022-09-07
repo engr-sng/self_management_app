@@ -21,6 +21,7 @@ class Public::ProjectsController < ApplicationController
       redirect_to project_path(@project_new.id)
       flash[:notice] = "プロジェクトの新規作成に成功しました。"
     else
+      flash[:alert] = "プロジェクトの新規作成に失敗しました。"
       render :new
     end
   end

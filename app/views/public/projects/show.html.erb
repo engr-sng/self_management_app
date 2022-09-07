@@ -1,23 +1,74 @@
 <div class="wrapper">
   <div class="container">
-
     <h2>プロジェクトの詳細</h2>
+    <div class="box-100">
       <p>プロジェクトID：<%= @project.id %></p>
       <p>プロジェクト名：<%= @project.title %></p>
       <p>プロジェクトオーナー：<%= @project.user.display_name %></p>
+    </div>
 
-      <% @project.milestones.each do |milestone| %>
-        <p><%= milestone.title %></p>
-
-          <% milestone.parent_tasks.each do |parent_task| %>
-            <p><%= parent_task.title %></p>
-
-            <% parent_task.child_tasks.each do |child_task| %>
-              <p><%= child_task.title %></p>
+    <div class="box-100" style="overflow-x: scroll;">
+      <table class="gantt-chart">
+        <thead>
+          <tr>
+            <th>WBS</th>
+            <th>タスク</th>
+            <th>開始日</th>
+            <th>終了日</th>
+            <th>ステータス</th>
+            <th>進捗率</th>
+            <th>担当者</th>
+            <% (@project.start_date..@project.end_date).each do |day| %>
+            <th><%= day.strftime("%m/%d") %></th>
             <% end %>
+          </tr>
+        </thead>
 
+        <tbody>
+          <% @project.milestones.each do |milestone| %>
+          <tr class="milestone-color">
+            <td><%= milestone.display_order %></td>
+            <td><%= milestone.title %></td>
+            <td><%= milestone.start_date.strftime("%Y/%m/%d") %></td>
+            <td><%= milestone.end_date.strftime("%Y/%m/%d") %></td>
+            <td><%= milestone.status %></td>
+            <td><%= milestone.progress %>%</td>
+            <td></td>
+            <% (@project.start_date..@project.end_date).each do |day| %>
+            <td></td>
+            <% end %>
+          </tr>
+            <% milestone.parent_tasks.each do |parent_task| %>
+            <tr class="parent_task-color">
+              <td><%= milestone.display_order %>-<%= parent_task.display_order %></td>
+              <td><%= parent_task.title %></td>
+              <td><%= parent_task.start_date.strftime("%Y/%m/%d") %></td>
+              <td><%= parent_task.end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= parent_task.status %></td>
+              <td><%= parent_task.progress %>%</td>
+              <td></td>
+              <% (@project.start_date..@project.end_date).each do |day| %>
+              <td></td>
+              <% end %>
+            </tr>
+              <% parent_task.child_tasks.each do |child_task| %>
+              <tr class="child_task-color">
+                <td><%= milestone.display_order %>-<%= parent_task.display_order %>-<%= child_task.display_order %></td>
+                <td><%= child_task.title %></td>
+                <td><%= child_task.start_date.strftime("%Y/%m/%d") %></td>
+                <td><%= child_task.end_date.strftime("%Y/%m/%d") %></td>
+                <td><%= child_task.status %></td>
+                <td><%= child_task.progress %>%</td>
+                <td><%= child_task.user.display_name %></td>
+                <% (@project.start_date..@project.end_date).each do |day| %>
+                <td></td>
+                <% end %>
+              </tr>
+              <% end %>
+            <% end %>
           <% end %>
-      <% end %>
-
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

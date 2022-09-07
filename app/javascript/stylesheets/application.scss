@@ -176,6 +176,55 @@ body {
   border-radius: 5px;
 }
 
+/* ガントチャートレイアウト */
+.gantt-chart {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.gantt-chart > thead {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+.gantt-chart > thead > tr > th {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.gantt-chart > tbody > tr > td {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.gantt-chart > thead > tr > th:nth-child(1) {
+  width: 60px;
+}
+
+.gantt-chart > thead > tr > th:nth-child(2) {
+  width: 200px;
+}
+
+.gantt-chart > thead > tr > th:nth-child(n+3):nth-child(-n+7) {
+  width: 100px;
+}
+
+.gantt-chart > thead > tr > th:nth-child(n+8) {
+  width: 60px;
+}
+
+.gantt-chart > tbody > tr {
+  border-bottom: solid 1px #eeeeee;
+  cursor: pointer;
+}
+
+.gantt-chart > tbody > tr:hover{
+  background-color: #d4f0fd;
+}
+
+
 /* 共通カラー */
 
 .green-color {
@@ -189,6 +238,19 @@ body {
 .red-color {
   background-color: #ff0000;
 }
+
+.milestone-color {
+  background-color: #ffffe0;
+}
+
+.parent_task-color {
+  background-color: #add8e6;
+}
+
+.child_task-color {
+  background-color: #90ee90;
+}
+
 
 /* バリデーションレイアウトキャンセル */
 .field_with_errors {
