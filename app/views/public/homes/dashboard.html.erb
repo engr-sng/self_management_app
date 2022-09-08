@@ -1,0 +1,63 @@
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="box-100">
+      <h2><%= @user.display_name %>さんのダッシュボード</h2>
+    </div>
+
+    <div class="box-50">
+      <h3>参加中のプロジェクト一覧</h3>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>プロジェクト名</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>ステータス</th>
+              <th>進捗率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @join_projects.each do |join_project| %>
+            <tr>
+              <td><%= link_to join_project.project.title, project_path(join_project.project.id), method: :get %></td>
+              <td><%= join_project.project.start_date.strftime("%Y/%m/%d") %></td>
+              <td><%= join_project.project.end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= join_project.project.status %></td>
+              <td><%= join_project.project.progress %>%</td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <div class="box-50">
+      <h3>割り当てられたタスク一覧</h3>
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タスク名</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>ステータス</th>
+              <th>進捗率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @my_tasks.each do |my_task| %>
+            <tr>
+              <td><%= my_task.title %></td>
+              <td><%= my_task.start_date.strftime("%Y/%m/%d") %></td>
+              <td><%= my_task.end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= my_task.status %></td>
+              <td><%= my_task.progress %>%</td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

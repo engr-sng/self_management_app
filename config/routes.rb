@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/about", to: "homes#about", as: "about"
+    get "/dashboard", to: "homes#dashboard", as: "dashboard"
     resources :users, only: [:edit, :update]
     resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
       resources :milestones, only: [:show]
