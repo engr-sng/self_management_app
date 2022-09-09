@@ -1,26 +1,34 @@
-<h2>ユーザーログイン</h2>
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <h2>ユーザーログイン</h2>
 
-<%= form_with model: @user, url: session_path(resource_name), local: true do |f| %>
-  <div class="field">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name" %>
-  </div>
+      <%= form_with model: @user, url: session_path(resource_name), local: true do |f| %>
+        <div class="form-field">
+          <%= f.label :user_name, "ユーザーネーム" %><br />
+          <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox"  %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <div class="form-field">
+          <%= f.label :password, "パスワード" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-textbox"  %>
+        </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <% if devise_mapping.rememberable? %>
+          <div class="form-field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me, "自動ログイン" %>
+          </div>
+        <% end %>
+
+        <div class="form-action">
+          <%= f.submit "ログイン", class: "btn green-color" %>
+        </div>
+      <% end %>
+
+      <div class="form-action">
+        <%= render "public/shared/links" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

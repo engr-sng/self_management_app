@@ -39,6 +39,7 @@
           <thead>
             <tr>
               <th>タスク名</th>
+              <th>プロジェクト名</th>
               <th>開始日</th>
               <th>終了日</th>
               <th>ステータス</th>
@@ -49,6 +50,7 @@
             <% @my_tasks.each do |my_task| %>
             <tr>
               <td><%= my_task.title %></td>
+              <td><%= my_task.project.title %></td>
               <td><%= my_task.start_date.strftime("%Y/%m/%d") %></td>
               <td><%= my_task.end_date.strftime("%Y/%m/%d") %></td>
               <td><%= my_task.status %></td>

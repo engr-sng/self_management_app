@@ -12,16 +12,16 @@ class Project < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  def initial_project_member
+  enum status: { in_preparation: 0, in_progress: 10, complete: 20 }
+
+  def initial_project_format
     project_member_new = ProjectMember.new(
       user_id: self.user_id,
       project_id: self.id,
       permission: 20
     )
     project_member_new.save
-  end
 
-  def initial_project_format
     for milestone_num in 1..4 do
       milestone_new = Milestone.new(
         project_id: self.id,

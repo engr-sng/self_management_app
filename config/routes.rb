@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :milestones, only: [:show]
       resources :parent_tasks, only: [:show]
       resources :child_tasks, only: [:show]
-      resources :project_members, only: [:create,:update,:destroy]
+      resources :project_members, only: [:new,:create,:update,:destroy]
     end
   end
 

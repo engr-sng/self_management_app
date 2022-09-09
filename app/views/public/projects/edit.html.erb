@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <h2>プロジェクトの編集</h2>
+
+      <%= render "layouts/errors", obj: @project %>
+
+      <%= form_with model: @project, url: project_path(@project.id), local: true, method: :patch do |f| %>
+        <div class="form-field">
+          <%= f.label :title, "タイトル(最大32字)" %><br>
+          <%= f.text_field :title, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :description, "説明(最大140字)" %><br>
+          <%= f.text_area :description, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :start_date, "開始日" %><br>
+          <%= f.date_field :start_date, value: @project.start_date, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :end_date, "終了日" %><br>
+          <%= f.date_field :end_date, value: @project.end_date, class: "form-textbox" %>
+        </div>
+
+        <div class="form-action">
+          <%= f.submit "更新", class: "btn green-color" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
