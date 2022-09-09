@@ -201,6 +201,10 @@ body {
   border-radius: 5px;
 }
 
+.btn:hover {
+  opacity: 1;
+}
+
 /* テーブルレイアウト */
 .table-container {
   overflow: scroll;

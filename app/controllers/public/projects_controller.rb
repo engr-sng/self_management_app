@@ -27,6 +27,7 @@ class Public::ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    @project_members = @project.project_members.pluck(:user_id).map {|k|[User.find(k).user_name,k]}
   end
 
   def update
@@ -46,7 +47,7 @@ class Public::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title,:description,:start_date,:end_date,:status,:progress)
+    params.require(:project).permit(:user_id,:title,:description,:start_date,:end_date,:status,:progress)
   end
 
 end

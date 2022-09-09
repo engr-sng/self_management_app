@@ -26,6 +26,11 @@
           <%= f.date_field :end_date, value: @project.end_date, class: "form-textbox" %>
         </div>
 
+        <div class="form-field">
+          <%= f.label :user_id, "プロジェクトオーナー" %><br>
+          <%= f.select :user_id, options_for_select(@project_members, @project.user_id),{ }, {id: "", class: "form-textbox"} %>
+        </div>
+
         <div class="form-action">
           <%= f.submit "更新", class: "btn green-color" %>
         </div>

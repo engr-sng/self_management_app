@@ -47,6 +47,9 @@
 
     <div class="box-100">
       <h2>プロジェクトメンバー</h2>
+    </div>
+
+    <div class="box-100">
       <div class="table-container">
         <table class="table">
           <thead>
@@ -69,6 +72,10 @@
           <% end %>
         </table>
       </div>
+    </div>
+
+    <div class="box-100">
+      <%= link_to "メンバーを追加する", new_project_project_member_path(@project.id), method: :get, class: "btn green-color" %>
     </div>
 
     <div class="box-100">

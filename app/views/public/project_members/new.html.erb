@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <h2>プロジェクトメンバーの追加</h2>
+
+      <%= render "layouts/errors", obj: @project_member_new %>
+
+      <%= form_with model: @project_member_new, url: project_project_members_path(@project.id), local: true, method: :post do |f| %>
+        <div class="form-field">
+          <%= f.label :user_name, "ユーザーネーム" %><br>
+          <%= f.text_field :user_name, class: "form-textbox" %>
+          <%= f.hidden_field :project_id, value: @project.id %>
+        </div>
+
+        <div class="form-action">
+          <%= f.submit "新規追加", class: "btn green-color" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
