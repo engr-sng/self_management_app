@@ -14,8 +14,6 @@ class User < ApplicationRecord
   validates :user_name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
-  enum is_deleted: { activate: false, deactivate: true }
-
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
