@@ -25,6 +25,23 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def confirm
+
+  end
+
+  def deactivate
+    user = User.find(current_user.id)
+    if user.update(is_deleted: true)
+      reset_session
+      flash[:notice] = "退会処理の実行に成功しました"
+      redirect_to root_path
+    else
+      flash[:alert] = "退会処理の実行に失敗しました。"
+      render :confirm
+    end
+  end
+
+
   private
 
   def user_params

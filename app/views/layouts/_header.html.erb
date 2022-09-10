@@ -15,6 +15,7 @@
       <nav>
         <ul class="nav-list">
           <% if admin_signed_in? %>
+            <li class="nav-list-item"><%= link_to "ユーザー一覧", admin_users_path, method: :get %></li>
             <li class="nav-list-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% elsif user_signed_in? %>
             <li class="nav-list-item"><%= link_to "ダッシュボード", dashboard_path, method: :get %></li>

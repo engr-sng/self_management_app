@@ -2,6 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  before_action :user_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -24,4 +25,15 @@ class Public::SessionsController < Devise::SessionsController
   def configure_sign_in_params
    devise_parameter_sanitizer.permit(:sign_in, keys: [:user_name])
   end
+
+  def user_state
+    user = User.find_by(user_name: params[:user][:user_name])
+    return if !user
+    if user.valid_password?(params[:user][:password])
+      if user.is_deleted
+        redirect_to new_user_registration_path
+      end
+    end
+  end
+
 end

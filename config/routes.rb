@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
     get "/dashboard", to: "users#dashboard", as: "dashboard"
     get "/my_page", to: "users#show", as: "my_page"
+    get '/confirm', to: "users#confirm", as: "confirm"
+    patch '/deactivate', to: "users#deactivate", as: "deactivate"
     resource :users, only: [:edit, :update]
 
     resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
+    resources :users, only: [:index,:show,:edit, :update]
   end
 
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
