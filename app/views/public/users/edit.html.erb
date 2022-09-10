@@ -8,7 +8,7 @@
       <%= form_with model: @user, url: users_path, local: true, method: :patch do |f| %>
 
       <div class="form-field">
-        <%= image_tag @user.get_profile_image(500,500), class: "profile-image-display" %>
+        <%= image_tag @user.get_profile_image(300,300), class: "profile-image-icon" %>
         <%= f.label :profile_image, "プロフィール画像" %><br />
         <%= f.file_field :profile_image, accept: "image/*", class: "form-textbox" %>
       </div>
