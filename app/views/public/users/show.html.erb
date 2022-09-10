@@ -1,15 +1,29 @@
 <div class="wrapper">
-  <div class="container flex-box">
-    <div class="box-100">
+  <div class="container">
+    <div class="form-container">
       <h2><%= @user.display_name %>さんのマイページ</h2>
-    </div>
 
-    <div class="box-100">
-      
-<%= @user.display_name %>
-<%= @user.user_name %>
-<%= @user.email %>
+      <div class="form-field">
+        <%= image_tag "no_image", size: "100x100", class: "profile-image-icon" %>
+      </div>
+
+      <div class="form-field">
+        <p>表示名<br>
+        <span class="form-textbox"><%= @user.display_name %></span></p>
+      </div>
+      <div class="form-field">
+        <p>ユーザーネーム<br>
+        <span class="form-textbox"><%= @user.user_name %></span></p>
+      </div>
+      <div class="form-field">
+        <p>メールアドレス<br>
+        <span class="form-textbox"><%= @user.user_name %><%= @user.email %></p>
+      </div>
+      <div class="form-action">
+        <%= link_to "編集", edit_users_path, method: :get, class: "btn green-color" %>
+      </div>
 
     </div>
   </div>
 </div>
+
