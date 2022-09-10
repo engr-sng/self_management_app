@@ -4,7 +4,7 @@
       <h2><%= @user.display_name %>さんのマイページ</h2>
 
       <div class="form-field">
-        <%= image_tag "no_image", size: "100x100", class: "profile-image-icon" %>
+        <%= image_tag @user.get_profile_image(500,500), class: "profile-image-display" %>
       </div>
 
       <div class="form-field">
