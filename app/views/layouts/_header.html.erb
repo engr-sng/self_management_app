@@ -18,6 +18,7 @@
             <li class="nav-list-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% elsif user_signed_in? %>
             <li class="nav-list-item"><%= link_to "ダッシュボード", dashboard_path, method: :get %></li>
+            <li class="nav-list-item"><%= link_to "マイページ", my_page_path, method: :get %></li>
             <li class="nav-list-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li class="nav-list-item"><%= link_to "HOME", root_path, method: :get %></li>
