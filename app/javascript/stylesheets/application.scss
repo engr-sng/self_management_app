@@ -16,6 +16,18 @@ body {
   font-family: "Hiragino Kaku Gothic ProN";
 }
 
+h1 {
+  font-size: 2.2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
 /* ヘッダー */
 
 .header-wrapper {
@@ -85,7 +97,7 @@ body {
 .footer-text {
   text-align: center;
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: 0.8em;
   padding: 20px 0;
 }
 

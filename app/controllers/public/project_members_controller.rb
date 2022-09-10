@@ -6,15 +6,18 @@ class Public::ProjectMembersController < ApplicationController
   end
 
   def create
-    user = User.find_by(user_name: params[:project_member][:user_name])
-    project = Project.find(params[:project_member][:project_id])
+    @user = User.find_by(user_name: params[:project_member][:user_name])
+    @project = Project.find(params[:project_member][:project_id])
 
     @project_member_new = ProjectMember.new(
-      user_id: user.id,
-      project_id: project.id,
+      user_id: @user.id,
+      project_id: @project.id,
       permission: 0
       )
-    if @project_member_new.save
+    if ProjectMember.find_by(user_id: @user.id, project_id: @project.id)
+      flash[:alert] = "選択したユーザーはすでにプロジェクトメンバーに追加されています。"
+      render :new
+    elsif @project_member_new.save
       redirect_to project_path(@project_member_new.project_id)
       flash[:notice] = "メンバーの追加に成功しました。"
     else

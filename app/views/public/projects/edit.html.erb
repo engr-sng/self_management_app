@@ -28,7 +28,7 @@
 
         <div class="form-field">
           <%= f.label :user_id, "プロジェクトオーナー" %><br>
-          <%= f.select :user_id, options_for_select(@project_members, @project.user_id),{ }, {id: "", class: "form-textbox"} %>
+          <%= f.select :user_id, options_for_select(@project.select_menber_list, @project.user_id),{ }, {id: "", class: "form-textbox"} %>
         </div>
 
         <div class="form-action">

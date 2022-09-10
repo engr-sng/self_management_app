@@ -27,7 +27,6 @@ class Public::ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @project_members = @project.project_members.pluck(:user_id).map {|k|[User.find(k).user_name,k]}
   end
 
   def update

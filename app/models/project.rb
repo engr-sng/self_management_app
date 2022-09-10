@@ -14,6 +14,10 @@ class Project < ApplicationRecord
 
   enum status: { in_preparation: 0, in_progress: 10, complete: 20 }
 
+  def select_menber_list
+    self.project_members.pluck(:user_id).map {|k|[User.find(k).user_name,k]}
+  end
+
   def initial_project_format
     project_member_new = ProjectMember.new(
       user_id: self.user_id,
