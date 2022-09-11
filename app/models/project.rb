@@ -3,14 +3,11 @@ class Project < ApplicationRecord
   belongs_to :user
 
   has_many :project_members, dependent: :destroy
-  has_many :milestones, dependent: :destroy
-  has_many :parent_tasks, through: :milestones
+  has_many :parent_tasks, dependent: :destroy
   has_many :child_tasks, through: :parent_tasks
 
   validates :title, presence: true, length: {minimum: 2, maximum: 32}
   validates :description, length: {maximum: 140}
-  validates :start_date, presence: true
-  validates :end_date, presence: true
 
   enum status: { in_preparation: 0, in_progress: 10, complete: 20 }
 

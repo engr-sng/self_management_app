@@ -68,27 +68,10 @@ ActiveRecord::Schema.define(version: 2022_09_10_061627) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "milestones", force: :cascade do |t|
+  create_table "parent_tasks", force: :cascade do |t|
     t.integer "project_id", null: false
     t.string "title", null: false
     t.text "description"
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.integer "status", default: 0, null: false
-    t.integer "progress", default: 0, null: false
-    t.integer "display_order"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "parent_tasks", force: :cascade do |t|
-    t.integer "milestone_id", null: false
-    t.string "title", null: false
-    t.text "description"
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.integer "status", default: 0, null: false
-    t.integer "progress", default: 0, null: false
     t.integer "display_order"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -106,10 +89,6 @@ ActiveRecord::Schema.define(version: 2022_09_10_061627) do
     t.integer "user_id", null: false
     t.string "title", null: false
     t.text "description"
-    t.date "start_date", null: false
-    t.date "end_date", null: false
-    t.integer "status", default: 0, null: false
-    t.integer "progress", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
