@@ -5,7 +5,6 @@ class Public::ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @project_members = @project.project_members
   end
 
   def new
@@ -15,8 +14,10 @@ class Public::ProjectsController < ApplicationController
   def create
     @project_new = Project.new(project_params)
     @project_new.user_id = current_user.id
+    start_date = params[:project][:start_date]
+    end_date = params[:project][:end_date]
     if  @project_new.save
-      @project_new.initial_project_format
+      @project_new.initial_project_format(start_date,end_date)
       redirect_to project_path(@project_new.id)
       flash[:notice] = "プロジェクトの新規作成に成功しました。"
     else
@@ -46,7 +47,7 @@ class Public::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:user_id,:title,:description,:start_date,:end_date,:status,:progress)
+    params.require(:project).permit(:user_id,:title,:description)
   end
 
 end

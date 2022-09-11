@@ -18,13 +18,13 @@
             </tr>
           </thead>
           <tbody>
-            <% @join_projects.each do |join_project| %>
+            <% @user.project_members.each do |join_project| %>
             <tr>
               <td><%= link_to join_project.project.title, project_path(join_project.project.id), method: :get %></td>
-              <td><%= join_project.project.start_date.strftime("%Y/%m/%d") %></td>
-              <td><%= join_project.project.end_date.strftime("%Y/%m/%d") %></td>
-              <td><%= join_project.project.status %></td>
-              <td><%= join_project.project.progress %>%</td>
+              <td><%= join_project.project.project_start_date.strftime("%Y/%m/%d") %></td>
+              <td><%= join_project.project.project_end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= join_project.project.project_status %></td>
+              <td><%= join_project.project.project_progress %>%</td>
             </tr>
           </tbody>
           <% end %>
@@ -40,7 +40,6 @@
           <thead>
             <tr>
               <th>タスク名</th>
-              <th>プロジェクト名</th>
               <th>開始日</th>
               <th>終了日</th>
               <th>ステータス</th>
@@ -48,10 +47,9 @@
             </tr>
           </thead>
           <tbody>
-            <% @my_tasks.each do |my_task| %>
+            <% @user.child_tasks.each do |my_task| %>
             <tr>
               <td><%= my_task.title %></td>
-              <td><%= my_task.project.title %></td>
               <td><%= my_task.start_date.strftime("%Y/%m/%d") %></td>
               <td><%= my_task.end_date.strftime("%Y/%m/%d") %></td>
               <td><%= my_task.status %></td>

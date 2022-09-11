@@ -17,13 +17,13 @@
         </div>
 
         <div class="form-field">
-          <%= f.label :start_date, "開始日" %><br>
-          <%= f.date_field :start_date, value: @project.start_date, class: "form-textbox" %>
+          <p>開始日(※開始日は自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @project.project_start_date.strftime("%Y/%m/%d") %></p>
         </div>
 
         <div class="form-field">
-          <%= f.label :end_date, "終了日" %><br>
-          <%= f.date_field :end_date, value: @project.end_date, class: "form-textbox" %>
+          <p>終了日(※終了日は自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @project.project_end_date.strftime("%Y/%m/%d") %></p>
         </div>
 
         <div class="form-field">

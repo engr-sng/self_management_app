@@ -238,6 +238,7 @@ h3 {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  table-layout: fixed;
 }
 
 .table > tbody > tr > td,.table > thead > tr > th {
@@ -314,15 +315,11 @@ h3 {
   width: 200px;
 }
 
-.gantt-chart > thead > tr > th:nth-child(3) {
-  width: 300px;
-}
-
-.gantt-chart > thead > tr > th:nth-child(n+4):nth-child(-n+8) {
+.gantt-chart > thead > tr > th:nth-child(n+3):nth-child(-n+7) {
   width: 100px;
 }
 
-.gantt-chart > thead > tr > th:nth-child(n+9) {
+.gantt-chart > thead > tr > th:nth-child(n+8) {
   width: 60px;
 }
 
@@ -354,11 +351,11 @@ h3 {
   background-color: #ffffe0;
 }
 
-.parent_task-color {
+.parent-task-color {
   background-color: #add8e6;
 }
 
-.child_task-color {
+.child-task-color {
   background-color: #90ee90;
 }
 
