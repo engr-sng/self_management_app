@@ -13,7 +13,11 @@ class ChildTask < ApplicationRecord
   enum status: { in_preparation: 0, in_progress: 50, complete: 100 }
 
   def date_comparison(day)
-    if self.start_date <= day && self.end_date >= day
+    if self.start_date.nil?
+      ""
+    elsif self.end_date.nil?
+      ""
+    elsif self.start_date <= day && self.end_date >= day
       "child-task-color"
     else
       ""

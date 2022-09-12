@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="form-container">
+      <h2>子タスクの新規作成</h2>
+
+      <%= render "layouts/errors", obj: @child_task_new %>
+
+      <%= form_with model: @child_task_new, url: project_child_tasks_path(@project.id), local: true, method: :post do |f| %>
+
+        <div class="form-field">
+          <%= f.label :title, "タイトル(最大32字)" %><br>
+          <%= f.text_field :title, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :description, "説明(最大140字)" %><br>
+          <%= f.text_area :description, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :parent_task_id, "親タスク" %><br>
+          <%= f.select :parent_task_id, options_for_select(@project.select_parent_task_list),{ }, {id: "", class: "form-textbox"} %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :start_date, "開始日" %><br>
+          <%= f.date_field :start_date, value: Date.today, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :end_date, "終了日" %><br>
+          <%= f.date_field :end_date, value: Date.today.next_month, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :user_id, "担当者" %><br>
+          <%= f.select :user_id, options_for_select(@project.select_menber_list, current_user.id),{ }, {id: "", class: "form-textbox"} %>
+        </div>
+
+        <div class="form-action">
+          <%= f.submit "新規作成", class: "btn green-color" %>
+        </div>
+
+      <% end %>
+
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+      </div>
+
+    </div>
+  </div>
+</div>

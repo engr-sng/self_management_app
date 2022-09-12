@@ -19,7 +19,7 @@
         <h3>期間</h3>
       </div>
       <div class="announcement_body">
-        <p><%= @project.project_start_date.strftime("%Y/%m/%d") %>～<%= @project.project_end_date.strftime("%Y/%m/%d") %></p>
+        <p><%= @project.project_start_date %>～<%= @project.project_end_date %></p>
       </div>
     </div>
 
@@ -80,6 +80,9 @@
 
     <div class="box-100">
       <h2>ガントチャート</h2>
+    </div>
+
+    <div class="box-100">
       <div class="gantt-chart-container">
         <table class="gantt-chart">
           <thead>
@@ -91,37 +94,43 @@
               <th>ステータス</th>
               <th>進捗率</th>
               <th>担当者</th>
-              <% (@project.project_start_date..@project.project_end_date).each do |day| %>
-              <th><%= day.strftime("%m/%d") %></th>
+              <% if (@project.project_start_date.class == Date) && (@project.project_end_date.class == Date) %>
+                <% (@project.project_start_date..@project.project_end_date).each do |day| %>
+                <th><%= day.strftime("%m/%d") %></th>
+                <% end %>
               <% end %>
             </tr>
           </thead>
 
           <tbody>
-            <% @project.parent_tasks.each do |parent_task| %>
+            <% @project.parent_tasks.order(display_order: :ASC).each do |parent_task| %>
             <tr>
               <td><%= parent_task.display_order %></td>
-              <td><%= parent_task.title %></td>
-              <td><%= parent_task.parent_task_start_date.strftime("%Y/%m/%d") %></td>
-              <td><%= parent_task.parent_task_end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= link_to parent_task.title, project_parent_task_path(@project.id,parent_task.id), method: :get %></td>
+              <td><%= parent_task.parent_task_start_date %></td>
+              <td><%= parent_task.parent_task_end_date %></td>
               <td><%= parent_task.parent_task_status %></td>
               <td><%= parent_task.parent_task_progress %>%</td>
               <td></td>
-              <% (@project.project_start_date..@project.project_end_date).each do |day| %>
-              <td class="<%= parent_task.date_comparison(day) %>"></td>
+              <% if (@project.project_start_date.class == Date) && (@project.project_end_date.class == Date) %>
+                <% (@project.project_start_date..@project.project_end_date).each do |day| %>
+                <td class="<%= parent_task.date_comparison(day) %>"></td>
+                <% end %>
               <% end %>
             </tr>
-              <% parent_task.child_tasks.each do |child_task| %>
+              <% parent_task.child_tasks.order(display_order: :ASC).each do |child_task| %>
               <tr>
                 <td><%= parent_task.display_order %>-<%= child_task.display_order %></td>
-                <td><%= child_task.title %></td>
-                <td><%= child_task.start_date.strftime("%Y/%m/%d") %></td>
-                <td><%= child_task.end_date.strftime("%Y/%m/%d") %></td>
+                <td><%= link_to child_task.title, project_child_task_path(@project.id,child_task.id), method: :get %></td>
+                <td><%= child_task.start_date %></td>
+                <td><%= child_task.end_date %></td>
                 <td><%= child_task.status %></td>
                 <td><%= child_task.progress %>%</td>
                 <td><%= child_task.user.display_name %></td>
-                <% (@project.project_start_date..@project.project_end_date).each do |day| %>
-                <td class="<%= child_task.date_comparison(day) %>"></td>
+                <% if (@project.project_start_date.class == Date) && (@project.project_end_date.class == Date) %>
+                  <% (@project.project_start_date..@project.project_end_date).each do |day| %>
+                  <td class="<%= child_task.date_comparison(day) %>"></td>
+                  <% end %>
                 <% end %>
               </tr>
               <% end %>
@@ -130,5 +139,11 @@
         </table>
       </div>
     </div>
+
+    <div class="box-100">
+      <%= link_to "親タスクを追加する", new_project_parent_task_path(@project.id), method: :get, class: "btn green-color" %>
+      <%= link_to "子タスクを追加する", new_project_child_task_path(@project.id), method: :get, class: "btn green-color" %>
+    </div>
+
   </div>
 </div>

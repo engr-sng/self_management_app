@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     patch '/deactivate', to: "users#deactivate", as: "deactivate"
     resource :users, only: [:edit, :update]
 
-    resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-      resources :parent_tasks, only: [:show]
-      resources :child_tasks, only: [:show]
+    resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
+      resources :parent_tasks, only: [:show,:new, :create,:edit,:update,:destroy]
+      resources :child_tasks, only: [:show,:new, :create,:edit,:update,:destroy]
       resources :project_members, only: [:new, :create, :update, :destroy]
     end
   end

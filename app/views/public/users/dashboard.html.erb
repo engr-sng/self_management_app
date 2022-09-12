@@ -4,8 +4,47 @@
       <h2><%= @user.display_name %>さんのダッシュボード</h2>
     </div>
 
-    <div class="box-50">
-      <h3>参加中のプロジェクト一覧</h3>
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>※準備中※</h3>
+      </div>
+      <div class="announcement_body">
+        <p>※作成中※<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>※準備中※</h3>
+      </div>
+      <div class="announcement_body">
+        <p>※作成中※<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>※準備中※</h3>
+      </div>
+      <div class="announcement_body">
+        <p>※作成中※<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>※準備中※</h3>
+      </div>
+      <div class="announcement_body">
+        <p>※作成中※<p>
+      </div>
+    </div>
+
+    <div class="box-100">
+      <h2>参加中のプロジェクト一覧</h2>
+    </div>
+
+    <div class="box-100">
       <div class="table-container">
         <table class="table">
           <thead>
@@ -21,8 +60,8 @@
             <% @user.project_members.each do |join_project| %>
             <tr>
               <td><%= link_to join_project.project.title, project_path(join_project.project.id), method: :get %></td>
-              <td><%= join_project.project.project_start_date.strftime("%Y/%m/%d") %></td>
-              <td><%= join_project.project.project_end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= join_project.project.project_start_date %></td>
+              <td><%= join_project.project.project_end_date %></td>
               <td><%= join_project.project.project_status %></td>
               <td><%= join_project.project.project_progress %>%</td>
             </tr>
@@ -30,11 +69,17 @@
           <% end %>
         </table>
       </div>
+    </div>
+
+    <div class="box-100">
       <%= link_to "プロジェクト新規作成", new_project_path, method: :get, class: "btn green-color" %>
     </div>
 
-    <div class="box-50">
-      <h3>割り当てられたタスク一覧</h3>
+    <div class="box-100">
+      <h2>割り当てられたタスク一覧</h2>
+    </div>
+
+    <div class="box-100">
       <div class="table-container">
         <table class="table">
           <thead>
@@ -49,9 +94,9 @@
           <tbody>
             <% @user.child_tasks.each do |my_task| %>
             <tr>
-              <td><%= my_task.title %></td>
-              <td><%= my_task.start_date.strftime("%Y/%m/%d") %></td>
-              <td><%= my_task.end_date.strftime("%Y/%m/%d") %></td>
+              <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
+              <td><%= my_task.start_date %></td>
+              <td><%= my_task.end_date %></td>
               <td><%= my_task.status %></td>
               <td><%= my_task.progress %>%</td>
             </tr>

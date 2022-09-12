@@ -8,7 +8,11 @@ class ParentTask < ApplicationRecord
   validates :description, length: {maximum: 140}
 
   def date_comparison(day)
-    if self.parent_task_start_date <= day && self.parent_task_end_date >= day
+    if self.parent_task_start_date.class != Date
+      ""
+    elsif self.parent_task_end_date.class != Date
+      ""
+    elsif self.parent_task_start_date <= day && self.parent_task_end_date >= day
       "parent-task-color"
     else
       ""

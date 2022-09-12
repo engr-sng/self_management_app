@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="form-container">
+      <h2><%= @parent_task.title %>の編集</h2>
+
+      <%= render "layouts/errors", obj: @parent_task %>
+
+      <%= form_with model: @parent_task, url: project_parent_task_path(@parent_task.project.id, @parent_task.id), local: true, method: :patch do |f| %>
+
+        <div class="form-field">
+          <%= f.label :title, "タイトル(最大32字)" %><br>
+          <%= f.text_field :title, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <%= f.label :description, "説明(最大140字)" %><br>
+          <%= f.text_area :description, class: "form-textbox" %>
+        </div>
+
+        <div class="form-field">
+          <p>開始日(※開始日は自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_start_date %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>終了日(※終了日は自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_end_date %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>ステータス(※ステータスは自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_status %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>進捗率(※進捗率は自動更新のため変更できません。)<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_progress %>%</span></p>
+        </div>
+
+        <div class="form-action">
+          <%= f.submit "更新", class: "btn green-color" %>
+        </div>
+
+      <% end %>
+
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@parent_task.project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+  </div>
+</div>

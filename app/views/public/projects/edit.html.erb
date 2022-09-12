@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
-      <h2>プロジェクトの編集</h2>
+      <h2><%= @project.title %>の編集</h2>
 
       <%= render "layouts/errors", obj: @project %>
 
@@ -18,12 +18,12 @@
 
         <div class="form-field">
           <p>開始日(※開始日は自動更新のため変更できません。)<br>
-          <span class="form-textbox"><%= @project.project_start_date.strftime("%Y/%m/%d") %></p>
+          <span class="form-textbox"><%= @project.project_start_date %></p>
         </div>
 
         <div class="form-field">
           <p>終了日(※終了日は自動更新のため変更できません。)<br>
-          <span class="form-textbox"><%= @project.project_end_date.strftime("%Y/%m/%d") %></p>
+          <span class="form-textbox"><%= @project.project_end_date %></p>
         </div>
 
         <div class="form-field">
@@ -34,6 +34,15 @@
         <div class="form-action">
           <%= f.submit "更新", class: "btn green-color" %>
         </div>
+
+        <div class="form-action">
+          <%= link_to "削除", project_path(@project.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+        </div>
+
+        <div class="form-action">
+          <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+        </div>
+
       <% end %>
     </div>
   </div>

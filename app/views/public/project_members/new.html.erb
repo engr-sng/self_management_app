@@ -13,8 +13,13 @@
         </div>
 
         <div class="form-action">
-          <%= f.submit "新規追加", class: "btn green-color" %>
+          <%= f.submit "追加", class: "btn green-color" %>
         </div>
+
+        <div class="form-action">
+          <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+        </div>
+
       <% end %>
     </div>
   </div>

@@ -13,6 +13,10 @@ class Project < ApplicationRecord
     self.project_members.pluck(:user_id).map {|k|[User.find(k).user_name,k]}
   end
 
+  def select_parent_task_list
+    self.parent_tasks.pluck(:id,:title).map {|k,t|[t,k]}
+  end
+
   def project_start_date
     if self.child_tasks.pluck(:start_date).min.nil?
       "未設定"
@@ -64,10 +68,11 @@ class Project < ApplicationRecord
     project_member_new.save
 
     for parent_task_num in 1..4 do
+      parent_task_array = ["Plan(計画)","Do(実行)","Check(評価)","Act(改善)"]
       parent_task_new = ParentTask.new(
         project_id: self.id,
-        title: "親タスク#{parent_task_num}",
-        description: "親タスク#{parent_task_num}の説明",
+        title: parent_task_array[parent_task_num - 1],
+        description: "#{parent_task_array[parent_task_num - 1]}の説明",
         display_order: parent_task_num
       )
       parent_task_new.save
@@ -75,8 +80,8 @@ class Project < ApplicationRecord
       for child_task_num in 1..3 do
         child_task_new = ChildTask.new(
           parent_task_id: parent_task_new.id,
-          title: "子タスク#{child_task_num}",
-          description: "子タスク#{child_task_num}の説明",
+          title: "#{parent_task_array[parent_task_num - 1]}の子タスク#{child_task_num}",
+          description: "#{parent_task_array[parent_task_num - 1]}の子タスク#{child_task_num}の説明",
           start_date: start_date,
           end_date: end_date,
           display_order: child_task_num,

@@ -1,0 +1,60 @@
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="form-container">
+      <h2><%= @child_task.title %>の詳細</h2>
+
+      <div class="form-field">
+        <p>タイトル<br>
+        <span class="form-textbox"><%= @child_task.title %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>説明<br>
+        <span class="form-textbox"><%= @child_task.description %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>親タスク<br>
+        <span class="form-textbox"><%= @child_task.parent_task.title %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>開始日<br>
+        <span class="form-textbox"><%= @child_task.start_date %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>終了日<br>
+        <span class="form-textbox"><%= @child_task.end_date %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>担当者<br>
+        <span class="form-textbox"><%= @child_task.user.display_name %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>ステータス<br>
+        <span class="form-textbox"><%= @child_task.status %></span></p>
+      </div>
+
+      <div class="form-field">
+        <p>進捗率<br>
+        <span class="form-textbox"><%= @child_task.progress %>%</span></p>
+      </div>
+
+      <div class="form-action">
+        <%= link_to "編集", edit_project_child_task_path(@child_task.project.id, @child_task.id), method: :get, class: "btn green-color" %>
+      </div>
+
+      <div class="form-action">
+        <%= link_to "削除", project_child_task_path(@child_task.project.id, @child_task.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+      </div>
+
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@child_task.project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+
+  </div>
+</div>

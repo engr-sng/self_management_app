@@ -42,6 +42,14 @@ class Public::ProjectsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find(params[:id])
+    if @project.destroy
+      redirect_to dashboard_path
+      flash[:notice] = "プロジェクトの削除に成功しました。"
+    else
+      flash[:alert] = "プロジェクトの削除に失敗しました。"
+      render :edit
+    end
   end
 
   private
