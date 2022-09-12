@@ -10,7 +10,7 @@ class ChildTask < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
 
-  enum status: { in_preparation: 0, in_progress: 50, complete: 100 }
+  enum status: { in_preparation: 0, in_progress: 50, waiting_review: 70, corrective_action: 80, correction_confirmation: 90, complete: 100 }
 
   def date_comparison(day)
     if self.start_date.nil?

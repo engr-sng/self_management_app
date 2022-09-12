@@ -14,6 +14,30 @@ class User < ApplicationRecord
   validates :user_name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
 
+  def task_count
+    self.child_tasks.count
+  end
+
+  def task_complete
+    self.child_tasks.where(progress: 100).count
+  end
+
+  def task_remaining
+    task_count - task_complete
+  end
+
+  def task_progress
+    sum_progress = self.child_tasks.sum(:progress)
+    count_tasks = self.child_tasks.count
+    if count_tasks == 0
+      0
+    elsif sum_progress == 0
+      0
+    else
+      (sum_progress/count_tasks).floor
+    end
+  end
+
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

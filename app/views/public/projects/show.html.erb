@@ -56,8 +56,7 @@
             <tr>
               <th>ユーザーネーム</th>
               <th>プロジェクト権限</th>
-              <th>タスク数</th>
-              <th>タスクの完了率</th>
+              <th>タスク進捗率</th>
             </tr>
           </thead>
           <tbody>
@@ -65,8 +64,7 @@
             <tr>
               <td><%= project_member.user.display_name %></td>
               <td><%= project_member.permission %></td>
-              <td>タスクの数</td>
-              <td>タスクの完了率</td>
+              <td><%= @project.project_member_task_progress(project_member.user_id) %>%</td>
             </tr>
           </tbody>
           <% end %>

@@ -6,42 +6,42 @@
 
     <div class="box-25">
       <div class="announcement_header">
-        <h3>※準備中※</h3>
+        <h3>担当タスク</h3>
       </div>
       <div class="announcement_body">
-        <p>※作成中※<p>
+        <p><%= @user.task_count %>件<p>
       </div>
     </div>
 
     <div class="box-25">
       <div class="announcement_header">
-        <h3>※準備中※</h3>
+        <h3>完了タスク</h3>
       </div>
       <div class="announcement_body">
-        <p>※作成中※<p>
+        <p><%= @user.task_complete %>件<p>
       </div>
     </div>
 
     <div class="box-25">
       <div class="announcement_header">
-        <h3>※準備中※</h3>
+        <h3>残りタスク</h3>
       </div>
       <div class="announcement_body">
-        <p>※作成中※<p>
+        <p><%= @user.task_remaining %>件<p>
       </div>
     </div>
 
     <div class="box-25">
       <div class="announcement_header">
-        <h3>※準備中※</h3>
+        <h3>タスク進捗率</h3>
       </div>
       <div class="announcement_body">
-        <p>※作成中※<p>
+        <p><%= @user.task_progress %>%<p>
       </div>
     </div>
 
     <div class="box-100">
-      <h2>参加中のプロジェクト一覧</h2>
+      <h2>プロジェクト一覧</h2>
     </div>
 
     <div class="box-100">
@@ -76,7 +76,7 @@
     </div>
 
     <div class="box-100">
-      <h2>割り当てられたタスク一覧</h2>
+      <h2>タスク一覧</h2>
     </div>
 
     <div class="box-100">

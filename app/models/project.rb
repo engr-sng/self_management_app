@@ -59,6 +59,18 @@ class Project < ApplicationRecord
     end
   end
 
+  def project_member_task_progress(user_id)
+    sum_progress = self.child_tasks.where(user_id: user_id).sum(:progress)
+    count_tasks = self.child_tasks.where(user_id: user_id).count
+    if count_tasks == 0
+      0
+    elsif sum_progress == 0
+      0
+    else
+      (sum_progress/count_tasks).floor
+    end
+  end
+
   def initial_project_format(start_date,end_date)
     project_member_new = ProjectMember.new(
       user_id: self.user_id,
