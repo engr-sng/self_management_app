@@ -1,26 +1,33 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
-      <h2><%= @user.display_name %>さんの詳細</h2>
+      <div class="box-100">
+        <h2><%= @user.display_name %>さんの詳細</h2>
+      </div>
 
-      <div class="form-field">
-        <p>表示名<br>
-        <span class="form-textbox"><%= @user.display_name %></span></p>
-      </div>
-      <div class="form-field">
-        <p>ユーザーネーム<br>
-        <span class="form-textbox"><%= @user.user_name %></span></p>
-      </div>
-      <div class="form-field">
-        <p>メールアドレス<br>
-        <span class="form-textbox"><%= @user.email %></p>
-      </div>
-      <div class="form-field">
-        <p>ステータス<br>
-        <span class="form-textbox"><%= @user.is_deleted %></p>
-      </div>
-      <div class="form-action">
-        <%= link_to "編集", edit_admin_user_path(@user.id), method: :get, class: "btn green-color" %>
+      <div class="box-100">
+        <div class="form-field">
+          <p>表示名<br>
+          <span class="form-textbox"><%= @user.display_name %></span></p>
+        </div>
+        <div class="form-field">
+          <p>ユーザーネーム<br>
+          <span class="form-textbox"><%= @user.user_name %></span></p>
+        </div>
+        <div class="form-field">
+          <p>メールアドレス<br>
+          <span class="form-textbox"><%= @user.email %></p>
+        </div>
+        <div class="form-field">
+          <p>ステータス<br>
+          <span class="form-textbox"><%= @user.is_deleted %></p>
+        </div>
+        <div class="form-action">
+          <%= link_to "編集", edit_admin_user_path(@user.id), method: :get, class: "btn green-color" %>
+        </div>
+        <div class="form-action">
+          <%= link_to "戻る", admin_users_path, method: :get, class: "btn blue-color" %>
+        </div>
       </div>
     </div>
   </div>

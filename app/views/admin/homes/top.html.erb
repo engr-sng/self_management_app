@@ -1,2 +1,48 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="box-100">
+      <h2>管理者ダッシュボード</h2>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>ユーザー</h3>
+      </div>
+      <div class="announcement_body">
+        <p><%= @users.count %>名<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>有効ユーザー</h3>
+      </div>
+      <div class="announcement_body">
+        <p><%= @users.where(is_deleted: false).count %>名<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>無効ユーザー</h3>
+      </div>
+      <div class="announcement_body">
+        <p><%= @users.where(is_deleted: true).count %>名<p>
+      </div>
+    </div>
+
+    <div class="box-25">
+      <div class="announcement_header">
+        <h3>退会率</h3>
+      </div>
+      <div class="announcement_body">
+        <p><%= @withdrawal_rate %>%<p>
+      </div>
+    </div>
+
+    <div class="box-100">
+      <%= link_to "ユーザー一覧", admin_users_path, method: :get, class: "btn green-color" %>
+    </div>
+
+  </div>
+</div>

@@ -1,34 +1,37 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
+      <div class="box-100">
+        <h2>管理者ログイン</h2>
+      </div>
 
-      <h2>管理者ログイン</h2>
-
-      <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
-        <div class="form-field">
-          <%= f.label :user_name, "ユーザーネーム" %><br />
-          <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
-        </div>
-
-        <div class="form-field">
-          <%= f.label :password, "パスワード" %><br />
-          <%= f.password_field :password, autocomplete: "current-password", class: "form-textbox" %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
+      <div class="box-100">
+        <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
           <div class="form-field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me, "自動ログイン" %>
+            <%= f.label :user_name, "ユーザーネーム" %><br />
+            <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :password, "パスワード" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-textbox" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me, "自動ログイン" %>
+            </div>
+          <% end %>
+
+          <div class="form-action">
+            <%= f.submit "ログイン", class: "btn green-color" %>
           </div>
         <% end %>
 
         <div class="form-action">
-          <%= f.submit "ログイン", class: "btn green-color" %>
+          <%= render "admin/shared/links" %>
         </div>
-      <% end %>
-
-      <div class="form-action">
-        <%= render "admin/shared/links" %>
       </div>
     </div>
   </div>

@@ -5,30 +5,28 @@
     </div>
 
     <div class="box-100">
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>表示名</th>
-              <th>ユーザーネーム</th>
-              <th>メールアドレス</th>
-              <th>ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-            <tr>
-              <td><%= user.id %></td>
-              <td><%= user.display_name %></td>
-              <td><%= link_to user.user_name, admin_user_path(user.id), method: :get %></td>
-              <td><%= user.email %></td>
-              <td><%= user.is_deleted %></td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
-
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>表示名</th>
+            <th>ユーザーネーム</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.display_name %></td>
+            <td><%= link_to user.user_name, admin_user_path(user.id), method: :get %></td>
+            <td><%= user.email %></td>
+            <td><%= user.is_deleted %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
