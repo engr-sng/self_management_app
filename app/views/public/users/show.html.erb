@@ -19,12 +19,15 @@
         <p>メールアドレス<br>
         <span class="form-textbox"><%= @user.email %></p>
       </div>
+
+      <% if @user.user_name != "guestuser" %>
       <div class="form-action">
         <%= link_to "編集", edit_users_path, method: :get, class: "btn green-color" %>
       </div>
       <div class="form-action">
         <%= link_to "退会", confirm_path, method: :get, class: "btn red-color" %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

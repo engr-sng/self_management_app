@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
 
+  before_action :ensure_guest_user, only: [:edit]
+
   def dashboard
     @user = User.find(current_user.id)
   end
@@ -45,4 +47,13 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:display_name, :user_name, :email, :profile_image)
   end
+
+  def ensure_guest_user
+    @user = User.find(current_user.id)
+    if @user.user_name == "guestuser"
+      redirect_to my_page_path
+      flash[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
 end
