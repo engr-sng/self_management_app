@@ -1,11 +1,35 @@
 <div class="wrapper">
-  <div class="container flex-box">
-    <div class="box-100">
-      <h2>ようこそSelfManagementAppへ！</h2>
-        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn gray-color", method: :post %>
-    </div>
+  <div class="container mv-image">
+    <div class="mv-image-transparent">
+      <div class="form-container">
+        <div class="box-100">
+          <h2>ようこそSelfManagementAppへ！</h2>
+        </div>
 
+        <div class="box-100">
+          <p>SelgManagementAppは、個人のタスクを一元管理することができる無料のWEBサービスです。</p>
+          <br>
+          <p>プロジェクト管理機能、タスク管理機能、ガントチャート機能など、個人が目標を達成するために必要な機能を利用することができます。</p>
+          <br>
+          <p>また、ご利用中のユーザーをプロジェクトへアサイン、タスクに担当者をアサインすることができるなど機能が盛りだくさんです。</p>
+          <br>
+          <p>ぜひ、ご活用ください。</p>
+        </div>
 
+        <div class="box-100">
+          <div class="form-action">
+            <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-100 gray-color", method: :post %>
+          </div>
+
+          <div class="form-action">
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-100 blue-color", method: :get %>
+          </div>
+
+          <div class="form-action">
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-100 green-color", method: :get %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
