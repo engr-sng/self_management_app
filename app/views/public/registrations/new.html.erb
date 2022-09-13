@@ -1,46 +1,50 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
-      <h2>ユーザー新規登録</h2>
+      <div class="box-100">
+        <h2>ユーザー新規登録</h2>
+      </div>
 
       <%= render "layouts/errors", obj: resource %>
 
-      <%= form_with model: @user, url: registration_path(resource_name), local: true do |f| %>
-        <div class="form-field">
-          <%= f.label :display_name, "表示名" %><br />
-          <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
-        </div>
+      <div class="box-100">
+        <%= form_with model: @user, url: registration_path(resource_name), local: true do |f| %>
+          <div class="form-field">
+            <%= f.label :display_name, "表示名" %><br />
+            <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :user_name, "ユーザーネーム" %><br />
-          <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
-        </div>
+          <div class="form-field">
+            <%= f.label :user_name, "ユーザーネーム" %><br />
+            <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :email, "メールアドレス" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
-        </div>
+          <div class="form-field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :password, "パスワード" %>
-          <% if @minimum_password_length %>
-            (パスワードは<%= @minimum_password_length %>文字以上で入力してください。)
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-textbox" %>
-        </div>
+          <div class="form-field">
+            <%= f.label :password, "パスワード" %>
+            <% if @minimum_password_length %>
+              (パスワードは<%= @minimum_password_length %>文字以上で入力してください。)
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-textbox" %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-textbox" %>
-        </div>
+          <div class="form-field">
+            <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-textbox" %>
+          </div>
+
+          <div class="form-action">
+            <%= f.submit "新規登録", class: "btn green-color" %>
+          </div>
+        <% end %>
 
         <div class="form-action">
-          <%= f.submit "新規登録", class: "btn green-color" %>
+          <%= render "public/shared/links" %>
         </div>
-      <% end %>
-
-      <div class="form-action">
-        <%= render "public/shared/links" %>
       </div>
     </div>
   </div>

@@ -1,50 +1,53 @@
 <div class="wrapper">
-  <div class="container flex-box">
+  <div class="container">
     <div class="form-container">
-      <h2><%= @parent_task.title %>の詳細</h2>
-
-      <div class="form-field">
-        <p>タイトル<br>
-        <span class="form-textbox"><%= @parent_task.title %></span></p>
+      <div class="box-100">
+        <h2><%= @parent_task.title %>の詳細</h2>
       </div>
 
-      <div class="form-field">
-        <p>説明<br>
-        <span class="form-textbox"><%= @parent_task.description %></span></p>
-      </div>
+      <div class="box-100">
+        <div class="form-field">
+          <p>タイトル<br>
+          <span class="form-textbox"><%= @parent_task.title %></span></p>
+        </div>
 
-      <div class="form-field">
-        <p>開始日<br>
-        <span class="form-textbox"><%= @parent_task.parent_task_start_date %></span></p>
-      </div>
+        <div class="form-field">
+          <p>説明<br>
+          <span class="form-textbox"><%= @parent_task.description %></span></p>
+        </div>
 
-      <div class="form-field">
-        <p>終了日<br>
-        <span class="form-textbox"><%= @parent_task.parent_task_end_date %></span></p>
-      </div>
+        <div class="form-field">
+          <p>開始日<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_start_date %></span></p>
+        </div>
 
-      <div class="form-field">
-        <p>ステータス<br>
-        <span class="form-textbox"><%= @parent_task.parent_task_status %></span></p>
-      </div>
+        <div class="form-field">
+          <p>終了日<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_end_date %></span></p>
+        </div>
 
-      <div class="form-field">
-        <p>進捗率<br>
-        <span class="form-textbox"><%= @parent_task.parent_task_progress %>%</span></p>
-      </div>
+        <div class="form-field">
+          <p>ステータス<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_status %></span></p>
+        </div>
 
-      <div class="form-action">
-        <%= link_to "編集", edit_project_parent_task_path(@parent_task.project.id, @parent_task.id), method: :get, class: "btn green-color" %>
-      </div>
+        <div class="form-field">
+          <p>進捗率<br>
+          <span class="form-textbox"><%= @parent_task.parent_task_progress %>%</span></p>
+        </div>
 
-      <div class="form-action">
-        <%= link_to "削除", project_parent_task_path(@parent_task.project.id, @parent_task.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
-      </div>
+        <div class="form-action">
+          <%= link_to "編集", edit_project_parent_task_path(@parent_task.project.id, @parent_task.id), method: :get, class: "btn green-color" %>
+        </div>
 
-      <div class="form-action">
-        <%= link_to "戻る", project_path(@parent_task.project.id), method: :get, class: "btn blue-color" %>
+        <div class="form-action">
+          <%= link_to "削除", project_parent_task_path(@parent_task.project.id, @parent_task.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+        </div>
+
+        <div class="form-action">
+          <%= link_to "戻る", project_path(@parent_task.project.id), method: :get, class: "btn blue-color" %>
+        </div>
       </div>
     </div>
-
   </div>
 </div>

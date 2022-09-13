@@ -1,33 +1,40 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
-      <h2><%= @user.display_name %>さんのマイページ</h2>
-
-      <div class="form-field">
-        <%= image_tag @user.get_profile_image(300,300), class: "profile-image-icon" %>
+      <div class="box-100">
+        <h2><%= @user.display_name %>さんのマイページ</h2>
       </div>
 
-      <div class="form-field">
-        <p>表示名<br>
-        <span class="form-textbox"><%= @user.display_name %></span></p>
-      </div>
-      <div class="form-field">
-        <p>ユーザーネーム<br>
-        <span class="form-textbox"><%= @user.user_name %></span></p>
-      </div>
-      <div class="form-field">
-        <p>メールアドレス<br>
-        <span class="form-textbox"><%= @user.email %></p>
-      </div>
+      <div class="box-100">
+        <div class="form-field">
+          <%= image_tag @user.get_profile_image(300,300), class: "profile-image-icon" %>
+        </div>
 
-      <% if @user.user_name != "guestuser" %>
-      <div class="form-action">
-        <%= link_to "編集", edit_users_path, method: :get, class: "btn green-color" %>
+        <div class="form-field">
+          <p>表示名<br>
+          <span class="form-textbox"><%= @user.display_name %></span></p>
+        </div>
+        <div class="form-field">
+          <p>ユーザーネーム<br>
+          <span class="form-textbox"><%= @user.user_name %></span></p>
+        </div>
+        <div class="form-field">
+          <p>メールアドレス<br>
+          <span class="form-textbox"><%= @user.email %></p>
+        </div>
+
+        <% if @user.user_name != "guestuser" %>
+        <div class="form-action">
+          <%= link_to "編集", edit_users_path, method: :get, class: "btn green-color" %>
+        </div>
+        <div class="form-action">
+          <%= link_to "退会", confirm_path, method: :get, class: "btn red-color" %>
+        </div>
+        <div class="form-action">
+          <%= link_to "戻る", dashboard_path, method: :get, class: "btn blue-color" %>
+        </div>
+        <% end %>
       </div>
-      <div class="form-action">
-        <%= link_to "退会", confirm_path, method: :get, class: "btn red-color" %>
-      </div>
-      <% end %>
     </div>
   </div>
 </div>

@@ -1,34 +1,41 @@
 <div class="wrapper">
   <div class="container">
     <div class="form-container">
-      <h2><%= @user.display_name %>さんの編集</h2>
+      <div class="box-100">
+        <h2><%= @user.display_name %>さんの編集</h2>
+      </div>
 
       <%= render "layouts/errors", obj: @user %>
 
-      <%= form_with model: @user, url: users_path, local: true, method: :patch do |f| %>
+      <div class="box-100">
+        <%= form_with model: @user, url: users_path, local: true, method: :patch do |f| %>
 
-      <div class="form-field">
-        <%= image_tag @user.get_profile_image(300,300), class: "profile-image-icon" %>
-        <%= f.label :profile_image, "プロフィール画像" %><br />
-        <%= f.file_field :profile_image, accept: "image/*", class: "form-textbox" %>
-      </div>
+        <div class="form-field">
+          <%= image_tag @user.get_profile_image(300,300), class: "profile-image-icon" %>
+          <%= f.label :profile_image, "プロフィール画像" %><br />
+          <%= f.file_field :profile_image, accept: "image/*", class: "form-textbox" %>
+        </div>
 
-      <div class="form-field">
-        <%= f.label :display_name, "表示名" %><br />
-        <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
+        <div class="form-field">
+          <%= f.label :display_name, "表示名" %><br />
+          <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :user_name, "ユーザーネーム" %><br />
+          <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
+        </div>
+        <div class="form-action">
+          <%= f.submit "更新", class: "btn green-color" %>
+        </div>
+        <% end %>
+        <div class="form-action">
+          <%= link_to "戻る", dashboard_path, method: :get, class: "btn blue-color" %>
+        </div>
       </div>
-      <div class="form-field">
-        <%= f.label :user_name, "ユーザーネーム" %><br />
-        <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
-      </div>
-      <div class="form-field">
-        <%= f.label :email, "メールアドレス" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
-      </div>
-      <div class="form-action">
-        <%= f.submit "更新", class: "btn green-color" %>
-      </div>
-      <% end %>
     </div>
   </div>
 </div>
