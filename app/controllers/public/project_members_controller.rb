@@ -1,6 +1,7 @@
 class Public::ProjectMembersController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :ensure_project_member, only: [:new, :create,:edit,:update,:destroy]
 
   def new
     @project = Project.find(params[:project_id])
@@ -79,6 +80,16 @@ class Public::ProjectMembersController < ApplicationController
 
   def project_member_params
     params.require(:project_member).permit(:user_id,:project_id,:permission)
+  end
+
+  def ensure_project_member
+      user = User.find(current_user.id)
+      project = Project.find(params[:project_id])
+      project_member = ProjectMember.find_by(project_id: project.id, user_id: user.id)
+    unless ProjectMember.permissions[project_member.permission] >= 20
+      redirect_to project_path(project.id)
+      flash[:alert] = "プロジェクトメンバーの追加や編集には管理者権限が必要です。"
+    end
   end
 
 end

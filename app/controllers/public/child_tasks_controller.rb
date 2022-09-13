@@ -1,6 +1,7 @@
 class Public::ChildTasksController < ApplicationController
 
   before_action :authenticate_user!
+  before_action :ensure_project_member, only: [:new, :create,:edit,:update,:destroy]
 
   def new
     @project = Project.find(params[:project_id])
@@ -84,6 +85,16 @@ class Public::ChildTasksController < ApplicationController
 
   def child_task_params
     params.require(:child_task).permit(:parent_task_id,:user_id,:title,:description,:start_date,:end_date,:status,:progress,:display_order)
+  end
+
+  def ensure_project_member
+      user = User.find(current_user.id)
+      project = Project.find(params[:project_id])
+      project_member = ProjectMember.find_by(project_id: project.id, user_id: user.id)
+    unless ProjectMember.permissions[project_member.permission] >= 10
+      redirect_to project_path(project.id)
+      flash[:alert] = "タスクの追加や編集には編集権限、または管理者権限が必要です。"
+    end
   end
 
 end
