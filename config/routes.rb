@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    get "/about", to: "homes#about", as: "about"
     get "/dashboard", to: "users#dashboard", as: "dashboard"
     get "/my_page", to: "users#show", as: "my_page"
     get '/confirm', to: "users#confirm", as: "confirm"

@@ -1,7 +1,6 @@
 class Public::ProjectsController < ApplicationController
 
-  def index
-  end
+  before_action :authenticate_user!
 
   def show
     @project = Project.find(params[:id])

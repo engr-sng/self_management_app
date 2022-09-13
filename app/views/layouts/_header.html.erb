@@ -1,12 +1,17 @@
 <header class="header-wrapper">
   <div class="header-container header-flex-box">
     <div class="header-left">
-      <h1 class="header-logo">SelfManagementApp</h1>
       <% if user_signed_in? %>
-        <p>ようこそユーザー<%= current_user.user_name %>さん</p>
+        <h1 class="header-logo"><%= link_to "SelfManagementApp", dashboard_path, method: :get %></h1>
+      <% elsif admin_signed_in? %>
+        <h1 class="header-logo"><%= link_to "SelfManagementApp", admin_root_path, method: :get %></h1>
+      <% else %>
+        <h1 class="header-logo"><%= link_to "SelfManagementApp", root_path, method: :get %></h1>
       <% end %>
 
-      <% if admin_signed_in? %>
+      <% if user_signed_in? %>
+        <p>ようこそユーザー<%= current_user.user_name %>さん</p>
+      <% elsif admin_signed_in? %>
         <p>ようこそ管理者<%= current_admin.user_name %>さん</p>
       <% end %>
     </div>
@@ -22,10 +27,8 @@
             <li class="nav-list-item"><%= link_to "マイページ", my_page_path, method: :get %></li>
             <li class="nav-list-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% else %>
-            <li class="nav-list-item"><%= link_to "HOME", root_path, method: :get %></li>
             <li class="nav-list-item"><%= link_to "新規登録", new_user_registration_path, method: :get %></li>
-            <li class="nav-list-item"><%= link_to "ユーザーログイン", new_user_session_path, method: :get %></li>
-            <li class="nav-list-item"><%= link_to "管理者ログイン", new_admin_session_path, method: :get %></li>
+            <li class="nav-list-item"><%= link_to "ログイン", new_user_session_path, method: :get %></li>
           <% end %>
         </ul>
       </nav>

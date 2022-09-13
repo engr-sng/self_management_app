@@ -74,6 +74,12 @@ h3 {
 .header-logo {
   display: inline-block;
   line-height: 60px;
+  list-style-type: none;
+  padding: 0 10px;
+}
+
+.header-logo > a {
+  color: inherit;
 }
 
 .nav-list {
