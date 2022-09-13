@@ -10,7 +10,7 @@ class Project < ApplicationRecord
   validates :description, length: {maximum: 140}
 
   def select_menber_list
-    self.project_members.pluck(:user_id).map {|k|[User.find(k).user_name,k]}
+    self.project_members.pluck(:user_id).map {|k|[User.find(k).display_name,k]}
   end
 
   def select_parent_task_list

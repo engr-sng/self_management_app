@@ -31,7 +31,12 @@ class Public::ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+    before_project_owner = @project.user_id
     if @project.update(project_params)
+      if before_project_owner != @project.user_id
+        project_owner = ProjectMember.find_by(project_id: @project.id, user_id: @project.user_id)
+        project_owner.update(permission: 20)
+      end
       redirect_to project_path(@project.id)
       flash[:notice] = "プロジェクトの更新に成功しました。"
     else

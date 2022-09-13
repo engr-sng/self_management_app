@@ -32,15 +32,47 @@ class Public::ProjectMembersController < ApplicationController
         render :new
       end
     end
+  end
 
+  def show
+    @project_member = ProjectMember.find(params[:id])
+  end
+
+  def edit
+    @project_member = ProjectMember.find(params[:id])
   end
 
   def update
+    @project_member = ProjectMember.find(params[:id])
 
+    if @project_member.user_id == @project_member.project.user_id
+      flash[:alert] = "プロジェクトオーナーの権限は変更できません。"
+      render :edit
+    elsif @project_member.update(project_member_params)
+      redirect_to project_path(@project_member.project.id)
+      flash[:notice] = "プロジェクトメンバーの更新に成功しました。"
+    else
+      flash[:alert] = "プロジェクトメンバーの更新に失敗しました。"
+      render :edit
+    end
   end
 
   def destroy
+    @project_member = ProjectMember.find(params[:id])
 
+    if @project_member.user_id == @project_member.project.user_id
+      flash[:alert] = "プロジェクトオーナーは削除できません。"
+      render :show
+    elsif @project_member.destroy
+      @project_member.project.child_tasks.where(user_id: @project_member.user_id).each do |child_task|
+        child_task.update(user_id: current_user.id)
+      end
+      redirect_to project_path(@project_member.project.id)
+      flash[:notice] = "プロジェクトメンバーの削除に成功しました。"
+    else
+      flash[:alert] = "プロジェクトメンバーの削除に失敗しました。"
+      render :show
+    end
   end
 
   private

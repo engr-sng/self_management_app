@@ -54,6 +54,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>表示名</th>
               <th>ユーザーネーム</th>
               <th>プロジェクト権限</th>
               <th>タスク進捗率</th>
@@ -62,7 +63,8 @@
           <tbody>
             <% @project.project_members.each do |project_member| %>
             <tr>
-              <td><%= project_member.user.display_name %></td>
+              <td><%= link_to project_member.user.display_name, project_project_member_path(@project.id,project_member.id), method: :get %></td>
+              <td><%= project_member.user.user_name %></td>
               <td><%= project_member.permission %></td>
               <td><%= @project.project_member_task_progress(project_member.user_id) %>%</td>
             </tr>

@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <div class="box-100">
+        <h2><%= @project_member.user.display_name %>の編集</h2>
+      </div>
+
+      <div class="box-100">
+        <%= form_with model: @project_member, url: project_project_member_path(@project_member.project_id, @project_member.id), local: true, method: :patch do |f| %>
+          <div class="form-field">
+            <p>表示名(※表示名は変更できません。)<br>
+            <span class="form-textbox"><%= @project_member.user.display_name %></span></p>
+          </div>
+
+          <div class="form-field">
+            <p>ユーザーネーム(※ユーザーネームは変更できません。)<br>
+            <span class="form-textbox"><%= @project_member.user.user_name %></span></p>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :permission, "プロジェクト権限" %><br>
+            <%= f.select :permission, options_for_select(ProjectMember.permissions.keys, @project_member.permission),{ }, {id: "", class: "form-textbox"} %>
+          </div>
+
+          <div class="form-action">
+            <%= f.submit "更新", class: "btn green-color" %>
+          </div>
+
+          <div class="form-action">
+            <%= link_to "戻る", project_path(@project_member.project_id), method: :get, class: "btn blue-color" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
