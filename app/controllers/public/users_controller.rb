@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
 
   def deactivate
     user = User.find(current_user.id)
-    if user.update(is_deleted: true)
+    if user.update(is_deleted: true, display_name: "退会したユーザー", user_name: "deactivate-user#{user.id}", email: "deactivate-user#{user.id}@sample.com", password: SecureRandom.urlsafe_base64)
       reset_session
       flash[:notice] = "退会処理の実行に成功しました"
       redirect_to root_path

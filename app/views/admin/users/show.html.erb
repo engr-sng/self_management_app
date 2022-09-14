@@ -20,7 +20,7 @@
         </div>
         <div class="form-field">
           <p>ステータス<br>
-          <span class="form-textbox"><%= @user.is_deleted %></p>
+          <span class="form-textbox"><%= @user.check_deleted %></p>
         </div>
         <div class="form-action">
           <%= link_to "編集", edit_admin_user_path(@user.id), method: :get, class: "btn green-color" %>

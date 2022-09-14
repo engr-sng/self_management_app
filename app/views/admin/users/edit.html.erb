@@ -24,7 +24,7 @@
         </div>
         <div class="form-field">
             <%= f.label :is_deleted, "ステータス" %><br>
-            <%= f.select :is_deleted, options_for_select([['有効', false], ['無効', true]], @user.is_deleted),{ }, {id: "", class: "form-textbox"} %>
+            <%= f.select :is_deleted, options_for_select(User.select_deleted, @user.is_deleted),{ }, {id: "", class: "form-textbox"} %>
         </div>
         <div class="form-action">
           <%= f.submit "更新", class: "btn green-color" %>

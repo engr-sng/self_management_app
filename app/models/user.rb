@@ -15,6 +15,18 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :is_deleted, inclusion: [true, false]
 
+  def check_deleted
+    if self.is_deleted
+      "無効"
+    else
+      "有効"
+    end
+  end
+
+  def self.select_deleted
+    select_deleted = [['有効', false], ['無効', true]]
+  end
+
   def task_count
     self.child_tasks.count
   end
