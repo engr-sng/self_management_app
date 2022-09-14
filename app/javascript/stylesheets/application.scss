@@ -270,6 +270,7 @@ h3 {
 
 .table > thead > tr > th, .table > tbody > tr > td {
   padding: 10px 0;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -332,6 +333,11 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.gantt-chart > tbody > tr > td:nth-child(n+3) {
+  text-align: center;
+}
+
 
 .gantt-chart > thead > tr > th {
   position: sticky;
@@ -398,8 +404,12 @@ h3 {
   width: 200px;
 }
 
-.gantt-chart > thead > tr > th:nth-child(n+3):nth-child(-n+7) {
+.gantt-chart > thead > tr > th:nth-child(n+3):nth-child(-n+6) {
   width: 100px;
+}
+
+.gantt-chart > thead > tr > th:nth-child(7) {
+  width: 200px;
 }
 
 .gantt-chart > thead > tr > th:nth-child(n+8) {
