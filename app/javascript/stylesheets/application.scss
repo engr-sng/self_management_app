@@ -1,4 +1,5 @@
 /* 全体的に適用 */
+
 * {
   padding: 0;
   margin: 0;
@@ -12,7 +13,6 @@
 body {
   font-size: 16px;
   color: #333333;
-  margin: 0;
   font-family: "Hiragino Kaku Gothic ProN";
 }
 
@@ -46,13 +46,13 @@ h3 {
 /* ヘッダー */
 
 .header-wrapper {
-    background-color: #000000;
+  background-color: #000000;
 }
 
 .header-container {
-    max-width: 1280px;
-    width: 100%;
-    margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .header-flex-box {
@@ -154,7 +154,9 @@ h3 {
   width: 25%;
   padding: 10px;
 }
+
 /* カラムレイアウト */
+
 .announcement_header {
   border-radius: 6px 6px 0 0;
   padding: 10px;
@@ -175,13 +177,14 @@ h3 {
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 0;
 }
+
 
 .notice-text {
   text-align: center;
   color: #ffffff;
   font-weight: bold;
+  padding: 20px 0;
 }
 
 /* エラーレイアウト */
@@ -206,7 +209,6 @@ h3 {
 
 .form-action {
   margin: 0 0 10px 0;
-  text-align: left;
 }
 
 .form-textbox {
@@ -222,7 +224,7 @@ h3 {
 
 /* プロフィール画像レイアウト */
 
-.profile-image-icon {
+.profile-image {
   max-width: 300px;
   width: 100%;
   border: solid 1px #eeeeee;
@@ -266,21 +268,28 @@ h3 {
   table-layout: fixed;
 }
 
-.table > tbody > tr > td,.table > thead > tr > th {
+.table > thead > tr > th, .table > tbody > tr > td {
   padding: 10px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.table > thead > tr > th, .table > tbody > tr > th {
+.table > thead > tr > th {
   position: sticky;
   top: 0;
   left: 0;
   background-color: #000000;
 }
 
-.table > thead > tr:first-child .table > thead > tr > th:first-child{
+.table > tbody > tr > td:first-child {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #f5f5f5;
+}
+
+.table > thead > tr:first-child, .table > thead > tr > th:first-child{
   z-index: 1;
 }
 
@@ -293,9 +302,10 @@ h3 {
   background-color: #f5f5f5;
 }
 
-.table > tbody > tr > td, .table > thead > tr > th {
+.table > thead > tr > th, .table > tbody > tr > td {
   border: solid 1px #eeeeee;
   cursor: pointer;
+  width: 200px;
 }
 
 .table > tbody > tr:hover{
@@ -303,6 +313,7 @@ h3 {
 }
 
 /* ガントチャートレイアウト */
+
 .gantt-chart-container {
   overflow: scroll;
   height: 500px;
@@ -315,21 +326,68 @@ h3 {
   table-layout: fixed;
 }
 
+.gantt-chart > thead > tr > th, .gantt-chart > tbody > tr > td {
+  padding: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gantt-chart > thead > tr > th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #000000;
+}
+
+.gantt-chart > thead > tr > th:nth-child(1) {
+  position: sticky;
+  left: 0;
+  background-color: #000000;
+}
+
+.gantt-chart > thead > tr > th:nth-child(2) {
+  position: sticky;
+  left: 60px;
+  background-color: #000000;
+}
+
+.gantt-chart > tbody > tr > td:nth-child(1) {
+  position: sticky;
+  left: 0;
+  background-color: #f5f5f5;
+}
+
+.gantt-chart > tbody > tr > td:nth-child(2) {
+  position: sticky;
+  left: 60px;
+  background-color: #f5f5f5;
+}
+
+.gantt-chart > thead > tr > th:nth-child(-n+2) {
+  z-index: 2;
+}
+
+.gantt-chart > tbody > tr > td:nth-child(-n+2) {
+  z-index: 1;
+}
+
 .gantt-chart > thead {
   background-color: #000000;
   color: #FFFFFF;
 }
 
-.gantt-chart > thead > tr > th {
-  text-align: center;
-  padding: 10px 0;
+.gantt-chart > tbody {
+  background-color: #f5f5f5;
 }
 
-.gantt-chart > tbody > tr > td {
-  padding: 10px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.gantt-chart > thead > tr > th, .gantt-chart > tbody > tr > td {
+  border: solid 1px #eeeeee;
+  cursor: pointer;
+}
+
+.gantt-chart > tbody > tr:hover{
+  background-color: #d4f0fd;
 }
 
 .gantt-chart > thead > tr > th:nth-child(1) {
@@ -346,15 +404,6 @@ h3 {
 
 .gantt-chart > thead > tr > th:nth-child(n+8) {
   width: 60px;
-}
-
-.gantt-chart > tbody > tr > td {
-  border: solid 1px #eeeeee;
-  cursor: pointer;
-}
-
-.gantt-chart > tbody > tr:hover{
-  background-color: #d4f0fd;
 }
 
 
@@ -392,3 +441,73 @@ h3 {
 .field_with_errors {
   display: contents;
 }
+
+/* タブレット */
+
+@media all and (max-width: 768px) {
+
+  .header-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .nav-list-item {
+    width: 100%;
+  }
+
+  body {
+    font-size: 16px;
+    color: #333333;
+    font-family: "Hiragino Kaku Gothic ProN";
+  }
+
+  h1 {
+    font-size: 1.9em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  .box-50 {
+    width: 100%;
+  }
+
+  .box-25 {
+    width: 50%;
+  }
+
+}
+
+/* スマートフォン */
+
+@media all and (max-width: 576px) {
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+}
+

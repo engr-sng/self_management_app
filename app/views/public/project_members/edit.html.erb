@@ -8,6 +8,10 @@
       <div class="box-100">
         <%= form_with model: @project_member, url: project_project_member_path(@project_member.project_id, @project_member.id), local: true, method: :patch do |f| %>
           <div class="form-field">
+            <%= image_tag @project_member.user.get_profile_image(300,300), class: "profile-image" %>
+          </div>
+
+          <div class="form-field">
             <p>表示名(※表示名は変更できません。)<br>
             <span class="form-textbox"><%= @project_member.user.display_name %></span></p>
           </div>
