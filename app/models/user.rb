@@ -11,8 +11,9 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   validates :display_name, presence: true
-  validates :user_name, presence: true, uniqueness: true
+  validates :user_name, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/, message: "は半角英数字で入力してください。" }
   validates :email, presence: true, uniqueness: true
+  validates :is_deleted, inclusion: [true, false]
 
   def task_count
     self.child_tasks.count

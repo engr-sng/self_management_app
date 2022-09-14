@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   has_many :parent_tasks, dependent: :destroy
   has_many :child_tasks, through: :parent_tasks
 
+  validates :user_id, presence: true
   validates :title, presence: true, length: {minimum: 2, maximum: 32}
   validates :description, length: {maximum: 140}
 
