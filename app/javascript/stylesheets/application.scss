@@ -255,6 +255,12 @@ h3 {
   width: 100%;
 }
 
+/* アイコンレイアウト */
+
+.fa {
+  margin: 0 10px 0 0;
+}
+
 /* テーブルレイアウト */
 .table-container {
   overflow: scroll;
@@ -307,10 +313,6 @@ h3 {
   border: solid 1px #eeeeee;
   cursor: pointer;
   width: 200px;
-}
-
-.table > tbody > tr:hover{
-  background-color: #d4f0fd;
 }
 
 /* ガントチャートレイアウト */
@@ -390,10 +392,6 @@ h3 {
 .gantt-chart > thead > tr > th, .gantt-chart > tbody > tr > td {
   border: solid 1px #eeeeee;
   cursor: pointer;
-}
-
-.gantt-chart > tbody > tr:hover{
-  background-color: #d4f0fd;
 }
 
 .gantt-chart > thead > tr > th:nth-child(1) {
