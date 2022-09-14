@@ -65,7 +65,7 @@
             <tr>
               <td><%= link_to project_member.user.display_name, project_project_member_path(@project.id,project_member.id), method: :get %></td>
               <td><%= project_member.user.user_name %></td>
-              <td><%= project_member.permission %></td>
+              <td><%= project_member.permission_i18n %></td>
               <td><%= @project.project_member_task_progress(project_member.user_id) %>%</td>
             </tr>
           </tbody>
@@ -124,7 +124,7 @@
                 <td><i class="fa fa-right-from-bracket"></i><%= link_to child_task.title, project_child_task_path(@project.id,child_task.id), method: :get %></td>
                 <td><%= child_task.start_date %></td>
                 <td><%= child_task.end_date %></td>
-                <td><%= child_task.status %></td>
+                <td><%= child_task.status_i18n %></td>
                 <td><%= child_task.progress %>%</td>
                 <td><%= child_task.user.display_name %></td>
                 <% if (@project.project_start_date.class == Date) && (@project.project_end_date.class == Date) %>

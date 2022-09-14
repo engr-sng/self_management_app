@@ -23,7 +23,7 @@
 
           <div class="form-field">
             <%= f.label :permission, "プロジェクト権限" %><br>
-            <%= f.select :permission, options_for_select(ProjectMember.permissions.keys, @project_member.permission),{ }, {id: "", class: "form-textbox"} %>
+            <%= f.select :permission, options_for_select(ProjectMember.permissions_i18n.invert, @project_member.permission),{ }, {id: "", class: "form-textbox"} %>
           </div>
 
           <div class="form-action">

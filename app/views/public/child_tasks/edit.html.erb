@@ -42,7 +42,7 @@
 
           <div class="form-field">
             <%= f.label :status, "ステータス" %><br>
-            <%= f.select :status, options_for_select(ChildTask.statuses.keys, @child_task.status),{ }, {id: "", class: "form-textbox"} %>
+            <%= f.select :status, options_for_select(ChildTask.statuses_i18n.invert, @child_task.status),{ }, {id: "", class: "form-textbox"} %>
           </div>
 
           <div class="form-field">

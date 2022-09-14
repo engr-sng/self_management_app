@@ -2,7 +2,7 @@
   <div class="container">
     <div class="form-container">
       <div class="box-100">
-        <h2><%= @project_member.user.display_name %>の詳細</h2>
+        <h2><%= @project_member.user.display_name %>さんの詳細</h2>
       </div>
 
       <div class="box-100">
@@ -22,7 +22,7 @@
 
         <div class="form-field">
           <p>プロジェクト権限<br>
-          <span class="form-textbox"><%= @project_member.permission %></span></p>
+          <span class="form-textbox"><%= @project_member.permission_i18n %></span></p>
         </div>
 
         <div class="form-action">

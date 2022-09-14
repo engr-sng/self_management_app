@@ -97,7 +97,7 @@
               <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
               <td><%= my_task.start_date %></td>
               <td><%= my_task.end_date %></td>
-              <td><%= my_task.status %></td>
+              <td><%= my_task.status_i18n %></td>
               <td><%= my_task.progress %>%</td>
             </tr>
           </tbody>
