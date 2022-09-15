@@ -17,7 +17,7 @@ class Public::ProjectsController < ApplicationController
     start_date = params[:project][:start_date]
     end_date = params[:project][:end_date]
     if  @project_new.save
-      @project_new.initial_project_format(start_date,end_date)
+      @project_new.initial_project_format(start_date, end_date)
       redirect_to project_path(@project_new.id)
       flash[:notice] = "プロジェクトの新規作成に成功しました。"
     else
@@ -42,7 +42,7 @@ class Public::ProjectsController < ApplicationController
       flash[:notice] = "プロジェクトの更新に成功しました。"
     else
       flash[:alert] = "プロジェクトの更新に失敗しました。"
-      render :show
+      render :edit
     end
   end
 

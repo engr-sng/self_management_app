@@ -1,7 +1,7 @@
 class Public::ParentTasksController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :ensure_project_member, only: [:new, :create,:edit,:update,:destroy]
+  before_action :ensure_project_member, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @project = Project.find(params[:project_id])

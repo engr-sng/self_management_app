@@ -9,26 +9,29 @@
 
       <div class="box-100">
         <%= form_with model: @user, url: admin_user_path(@user.id), local: true, method: :patch do |f| %>
+          <div class="form-field">
+            <%= f.label :display_name, "表示名" %><br />
+            <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :display_name, "表示名" %><br />
-          <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name", class: "form-textbox" %>
-        </div>
-        <div class="form-field">
-          <%= f.label :user_name, "ユーザーネーム" %><br />
-          <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
-        </div>
-        <div class="form-field">
-          <%= f.label :email, "メールアドレス" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
-        </div>
-        <div class="form-field">
-            <%= f.label :is_deleted, "ステータス" %><br>
-            <%= f.select :is_deleted, options_for_select(User.select_deleted, @user.is_deleted),{ }, {id: "", class: "form-textbox"} %>
-        </div>
-        <div class="form-action">
-          <%= f.submit "更新", class: "btn green-color" %>
-        </div>
+          <div class="form-field">
+            <%= f.label :user_name, "ユーザーネーム" %><br />
+            <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+              <%= f.label :is_deleted, "ステータス" %><br>
+              <%= f.select :is_deleted, options_for_select(User.select_deleted, @user.is_deleted),{ }, {id: "", class: "form-textbox"} %>
+          </div>
+
+          <div class="form-action">
+            <%= f.submit "更新", class: "btn green-color" %>
+          </div>
         <% end %>
 
         <div class="form-action">

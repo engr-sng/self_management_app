@@ -4,14 +4,14 @@ ja:
       permission:
         viewer: "閲覧権限"
         editor: "編集権限"
-        administrator: "管理者権限"
+        administrator: "管理権限"
     child_task:
       status:
         in_preparation: "未対応"
         in_progress: "進行中"
         waiting_review: "レビュー待ち"
-        corrective_action: "指摘対応中"
-        correction_confirmation: "修正確認待ち"
+        corrective_action: "修正対応中"
+        correction_confirmation: "再確認待ち"
         complete: "完了"
   activerecord:
     models:

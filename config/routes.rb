@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     resource :users, only: [:edit, :update]
 
     resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
-      resources :parent_tasks, only: [:show,:new, :create,:edit,:update,:destroy]
-      resources :child_tasks, only: [:show,:new, :create,:edit,:update,:destroy]
-      resources :project_members, only: [:show,:new, :create,:edit, :update, :destroy]
+      resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
+      resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
+      resources :project_members, only: [:show, :new, :create, :edit, :update, :destroy]
     end
   end
 
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
-    resources :users, only: [:index,:show,:edit, :update]
+    resources :users, only: [:index, :show, :edit, :update]
   end
 
   devise_for :admins, skip: [:registrations, :passwords], controllers: {

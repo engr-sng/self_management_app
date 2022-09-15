@@ -15,7 +15,7 @@ class Project < ApplicationRecord
   end
 
   def select_parent_task_list
-    self.parent_tasks.pluck(:id,:title).map {|k,t|[t,k]}
+    self.parent_tasks.pluck(:id, :title).map {|k,t|[t,k]}
   end
 
   def project_start_date

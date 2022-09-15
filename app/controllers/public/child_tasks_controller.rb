@@ -1,7 +1,7 @@
 class Public::ChildTasksController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :ensure_project_member, only: [:new, :create,:edit,:update,:destroy]
+  before_action :ensure_project_member, only: [:new, :create, :edit, :update, :destroy]
 
   def new
     @project = Project.find(params[:project_id])
@@ -38,21 +38,21 @@ class Public::ChildTasksController < ApplicationController
 
   def update
     @child_task = ChildTask.find(params[:id])
-    @change_before_parent_task = @child_task.parent_task
+    before_parent_task = @child_task.parent_task
     display_order_num = 0
     if @child_task.update(child_task_params)
       @child_task.update(progress: ChildTask.statuses[@child_task.status])
-      @change_after_parent_task = @child_task.parent_task
-      if @change_before_parent_task.id != @change_after_parent_task.id
-        @change_before_parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
+      after_parent_task = @child_task.parent_task
+      if before_parent_task.id != after_parent_task.id
+        before_parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
           display_order_num += 1
           child_task.update(display_order: display_order_num)
         end
 
-        if @change_after_parent_task.child_tasks.pluck(:display_order).max.nil?
+        if after_parent_task.child_tasks.pluck(:display_order).max.nil?
           @child_task.update(display_order: 1)
         else
-          display_order_max = (@change_after_parent_task.child_tasks.pluck(:display_order).max + 1)
+          display_order_max = (after_parent_task.child_tasks.pluck(:display_order).max + 1)
           @child_task.update(display_order: display_order_max)
         end
       end
