@@ -31,7 +31,7 @@ h3 {
 /* メインビジュアル */
 
 .mv-image {
-  background-image: url(/assets/mv.jpg);
+  background-image: image-url("mv.jpg");
   background-position: center;
   background-size: cover;
   height: 600px;
@@ -471,12 +471,6 @@ h3 {
   }
   .nav-list-item {
     width: 100%;
-  }
-
-  body {
-    font-size: 16px;
-    color: #333333;
-    font-family: "Hiragino Kaku Gothic ProN";
   }
 
   h1 {
