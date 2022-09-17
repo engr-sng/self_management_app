@@ -10,6 +10,9 @@ import "channels"
 import "script.js"
 import "../stylesheets/application"
 
+const images = require.context('../images', true)
+const imagePath = (name) => images(name, true)
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
