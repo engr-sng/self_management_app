@@ -80,29 +80,18 @@
     </div>
 
     <div class="box-100">
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>タスク名</th>
-              <th>開始日</th>
-              <th>終了日</th>
-              <th>ステータス</th>
-              <th>進捗率</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @user.child_tasks.each do |my_task| %>
-            <tr>
-              <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
-              <td><%= my_task.start_date %></td>
-              <td><%= my_task.end_date %></td>
-              <td><%= my_task.status_i18n %></td>
-              <td><%= my_task.progress %>%</td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
+      <ul class="search-list">
+        <li class="search-list-item"><%= link_to "担当タスク", my_task_refinement_path(refinement: "all"), method: :post, remote: true %></li>
+        <li class="search-list-item"><%= link_to "完了タスク", my_task_refinement_path(refinement: "complete"), method: :post, remote: true %></li>
+        <li class="search-list-item"><%= link_to "残りタスク", my_task_refinement_path(refinement: "remaining"), method: :post, remote: true %></li>
+      </ul>
+    </div>
+
+    <div class="box-100">
+      <div class="table-container" id="my_task_refinement">
+
+        <%= render "public/users/my_task_refinement", { user: @user, refinement: @refinement } %>
+
       </div>
     </div>
   </div>

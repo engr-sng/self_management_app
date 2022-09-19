@@ -1,0 +1,22 @@
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タスク名</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>ステータス</th>
+              <th>進捗率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% user.my_task_refinement(refinement).each do |my_task| %>
+            <tr>
+              <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
+              <td><%= my_task.start_date %></td>
+              <td><%= my_task.end_date %></td>
+              <td><%= my_task.status_i18n %></td>
+              <td><%= my_task.progress %>%</td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>

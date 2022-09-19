@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/confirm', to: "users#confirm", as: "confirm"
     patch '/deactivate', to: "users#deactivate", as: "deactivate"
     resource :users, only: [:edit, :update]
+    post '/my_task_refinement', to: "users#my_task_refinement", as: "my_task_refinement"
 
     resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]

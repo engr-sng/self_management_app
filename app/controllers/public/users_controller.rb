@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
 
   def dashboard
     @user = User.find(current_user.id)
+    @refinement = params[:refinement]
   end
 
   def show
@@ -42,6 +43,10 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def my_task_refinement
+    @user = User.find(current_user.id)
+    @refinement = params[:refinement]
+  end
 
   private
 

@@ -15,6 +15,18 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :is_deleted, inclusion: [true, false]
 
+  def my_task_refinement(refinement)
+    if refinement.nil?
+      self.child_tasks.where.not(progress: 100)
+    elsif refinement == "all"
+      self.child_tasks
+    elsif refinement == "complete"
+      self.child_tasks.where(progress: 100)
+    elsif refinement == "remaining"
+      self.child_tasks.where.not(progress: 100)
+    end
+  end
+
   def check_deleted
     if self.is_deleted
       "無効"
