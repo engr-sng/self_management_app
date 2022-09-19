@@ -72,6 +72,18 @@ class Project < ApplicationRecord
     end
   end
 
+  def project_refinement(refinement)
+    if refinement.nil?
+      self.project_progress != 100
+    elsif refinement == "all"
+      self.project_progress
+    elsif refinement == "complete"
+      self.project_progress == 100
+    elsif refinement == "remaining"
+      self.project_progress != 100
+    end
+  end
+
   def initial_project_format(start_date,end_date)
     project_member_new = ProjectMember.new(
       user_id: self.user_id,

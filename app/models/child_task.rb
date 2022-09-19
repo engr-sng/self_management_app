@@ -14,6 +14,18 @@ class ChildTask < ApplicationRecord
 
   enum status: { in_preparation: 0, in_progress: 50, waiting_review: 70, corrective_action: 80, correction_confirmation: 90, complete: 100 }
 
+  def child_task_refinement(refinement)
+    if refinement.nil?
+      self.progress != 100
+    elsif refinement == "all"
+      self.progress
+    elsif refinement == "complete"
+      self.progress == 100
+    elsif refinement == "remaining"
+      self.progress != 100
+    end
+  end
+
   def date_comparison(day)
     if self.start_date.nil?
       ""

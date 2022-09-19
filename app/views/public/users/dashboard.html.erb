@@ -45,29 +45,13 @@
     </div>
 
     <div class="box-100">
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>プロジェクト名</th>
-              <th>開始日</th>
-              <th>終了日</th>
-              <th>ステータス</th>
-              <th>進捗率</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @user.project_members.each do |join_project| %>
-            <tr>
-              <td><%= link_to join_project.project.title, project_path(join_project.project.id), method: :get %></td>
-              <td><%= join_project.project.project_start_date %></td>
-              <td><%= join_project.project.project_end_date %></td>
-              <td><%= join_project.project.project_status %></td>
-              <td><%= join_project.project.project_progress %>%</td>
-            </tr>
-          </tbody>
-          <% end %>
-        </table>
+      <ul class="search-list">
+        <li class="search-list-item"><%= link_to "参加プロジェクト", my_project_refinement_path(refinement: "all"), method: :post, remote: true %></li>
+        <li class="search-list-item"><%= link_to "完了プロジェクト", my_project_refinement_path(refinement: "complete"), method: :post, remote: true %></li>
+        <li class="search-list-item"><%= link_to "残りプロジェクト", my_project_refinement_path(refinement: "remaining"), method: :post, remote: true %></li>
+      </ul>
+      <div class="table-container" id="my_project_refinement">
+        <%= render "public/users/my_project_refinement", { user: @user, refinement: @refinement } %>
       </div>
     </div>
 
@@ -85,13 +69,8 @@
         <li class="search-list-item"><%= link_to "完了タスク", my_task_refinement_path(refinement: "complete"), method: :post, remote: true %></li>
         <li class="search-list-item"><%= link_to "残りタスク", my_task_refinement_path(refinement: "remaining"), method: :post, remote: true %></li>
       </ul>
-    </div>
-
-    <div class="box-100">
       <div class="table-container" id="my_task_refinement">
-
         <%= render "public/users/my_task_refinement", { user: @user, refinement: @refinement } %>
-
       </div>
     </div>
   </div>

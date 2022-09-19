@@ -48,6 +48,11 @@ class Public::UsersController < ApplicationController
     @refinement = params[:refinement]
   end
 
+  def my_project_refinement
+    @user = User.find(current_user.id)
+    @refinement = params[:refinement]
+  end
+
   private
 
   def user_params

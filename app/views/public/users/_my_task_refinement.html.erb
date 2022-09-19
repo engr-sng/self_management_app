@@ -9,7 +9,8 @@
             </tr>
           </thead>
           <tbody>
-            <% user.my_task_refinement(refinement).each do |my_task| %>
+          <% user.child_tasks.each do |my_task| %>
+            <% if my_task.child_task_refinement(refinement) %>
             <tr>
               <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
               <td><%= my_task.start_date %></td>
@@ -17,6 +18,7 @@
               <td><%= my_task.status_i18n %></td>
               <td><%= my_task.progress %>%</td>
             </tr>
-          </tbody>
+            <% end %>
           <% end %>
+          </tbody>
         </table>
