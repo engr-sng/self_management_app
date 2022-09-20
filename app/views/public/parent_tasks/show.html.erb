@@ -7,33 +7,38 @@
 
       <div class="box-100">
         <div class="form-field">
+          <p>関連プロジェクト<br>
+          <span class="display-textbox"><%= @parent_task.project.title %></span></p>
+        </div>
+
+        <div class="form-field">
           <p>タイトル<br>
-          <span class="form-textbox"><%= @parent_task.title %></span></p>
+          <span class="display-textbox"><%= @parent_task.title %></span></p>
         </div>
 
         <div class="form-field">
           <p>説明<br>
-          <span class="form-textbox"><%= @parent_task.description %></span></p>
+          <span class="display-textbox"><%= @parent_task.description %></span></p>
         </div>
 
         <div class="form-field">
           <p>開始日<br>
-          <span class="form-textbox"><%= @parent_task.parent_task_start_date %></span></p>
+          <span class="display-textbox"><%= @parent_task.parent_task_start_date %></span></p>
         </div>
 
         <div class="form-field">
           <p>終了日<br>
-          <span class="form-textbox"><%= @parent_task.parent_task_end_date %></span></p>
+          <span class="display-textbox"><%= @parent_task.parent_task_end_date %></span></p>
         </div>
 
         <div class="form-field">
           <p>ステータス<br>
-          <span class="form-textbox"><%= @parent_task.parent_task_status %></span></p>
+          <span class="display-textbox"><%= @parent_task.parent_task_status %></span></p>
         </div>
 
         <div class="form-field">
           <p>進捗率<br>
-          <span class="form-textbox"><%= @parent_task.parent_task_progress %>%</span></p>
+          <span class="display-textbox"><%= @parent_task.parent_task_progress %>%</span></p>
         </div>
 
         <div class="form-action">

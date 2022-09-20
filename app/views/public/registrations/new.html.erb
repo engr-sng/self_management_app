@@ -15,7 +15,7 @@
           </div>
 
           <div class="form-field">
-            <%= f.label :user_name, "ユーザーネーム(※「a-z,0-9(半角英数字)」と「-(ハイフン)」のみ使用できます。)" %><br />
+            <%= f.label :user_name, "ユーザーネーム" %><span class="note-text">※「a-z,0-9(半角英数字)」と「-(ハイフン)」のみ使用できます。</span><br />
             <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", class: "form-textbox" %>
           </div>
 
@@ -27,13 +27,13 @@
           <div class="form-field">
             <%= f.label :password, "パスワード" %>
             <% if @minimum_password_length %>
-              (パスワードは<%= @minimum_password_length %>文字以上で入力してください。)
+              <span class="note-text">※パスワードは<%= @minimum_password_length %>文字以上で入力してください。</span>
             <% end %><br />
             <%= f.password_field :password, autocomplete: "new-password", class: "form-textbox" %>
           </div>
 
           <div class="form-field">
-            <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
+            <%= f.label :password_confirmation, "パスワード" %><span class="note-text">※確認用</span><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-textbox" %>
           </div>
 
