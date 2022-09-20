@@ -39,14 +39,15 @@ class Public::ChildTasksController < ApplicationController
   def update
     @child_task = ChildTask.find(params[:id])
     before_parent_task = @child_task.parent_task
-    display_order_num = 0
+    before_display_order_num = 0
+    after_display_order_num = 0
     if @child_task.update(child_task_params)
       @child_task.update(progress: ChildTask.statuses[@child_task.status])
       after_parent_task = @child_task.parent_task
       if before_parent_task.id != after_parent_task.id
         before_parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
-          display_order_num += 1
-          child_task.update(display_order: display_order_num)
+          before_display_order_num += 1
+          child_task.update(display_order: before_display_order_num)
         end
 
         if after_parent_task.child_tasks.pluck(:display_order).max.nil?
@@ -55,7 +56,13 @@ class Public::ChildTasksController < ApplicationController
           display_order_max = (after_parent_task.child_tasks.pluck(:display_order).max + 1)
           @child_task.update(display_order: display_order_max)
         end
+
+        after_parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
+          after_display_order_num += 1
+          child_task.update(display_order: after_display_order_num)
+        end
       end
+
       redirect_to project_path(@child_task.project.id)
       flash[:notice] = "子タスクの更新に成功しました。"
     else
