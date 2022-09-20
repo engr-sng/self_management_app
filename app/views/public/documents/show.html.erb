@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <div class="box-100">
+        <h2><%= @document.title %>の詳細</h2>
+      </div>
+
+      <div class="box-100">
+        <div class="form-field">
+          <p>関連プロジェクト<br>
+          <span class="display-textbox"><%= @document.project.title %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>タイトル<br>
+          <span class="display-textbox"><%= @document.title %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>説明<br>
+          <span class="display-textbox"><%= @document.description %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>URL<br>
+          <span class="display-textbox"><%= link_to @document.url, @document.url, target: :_blank, rel: "noopener noreferrer" %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>作成者<br>
+          <span class="display-textbox"><%= @document.user.display_name %></span></p>
+        </div>
+
+        <div class="form-field">
+          <p>作成日<br>
+          <span class="display-textbox"><%= @document.created_at.to_date %></span></p>
+        </div>
+
+        <div class="form-action">
+          <%= link_to "編集", edit_project_document_path(@document.project_id, @document.id), method: :get, class: "btn green-color" %>
+        </div>
+
+        <div class="form-action">
+          <%= link_to "削除", project_document_path(@document.project_id, @document.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+        </div>
+
+        <div class="form-action">
+          <%= link_to "戻る", project_path(@document.project_id), method: :get, class: "btn blue-color" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

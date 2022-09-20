@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :project_members, only: [:show, :new, :create, :edit, :update, :destroy]
+      resources :documents, only: [:show, :new, :create, :edit, :update, :destroy]
     end
   end
 

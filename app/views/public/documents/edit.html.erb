@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="form-container">
+      <div class="box-100">
+        <h2><%= @document.title %>の編集</h2>
+      </div>
+
+      <%= render "layouts/errors", obj: @document %>
+
+      <div class="box-100">
+        <%= form_with model: @document, url: project_document_path(@document.project_id, @document.id), local: true, method: :patch do |f| %>
+
+          <div class="form-field">
+            <p>関連プロジェクト<span class="note-text">※プロジェクトは変更できません。</span><br>
+            <span class="display-textbox"><%= @document.project.title %></span></p>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :title, "タイトル(最大32字)" %><br>
+            <%= f.text_field :title, class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :description, "説明(最大140字)" %><br>
+            <%= f.text_area :description, class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :url, "URL" %><br>
+            <%= f.text_area :url, class: "form-textbox" %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :user_id, "作成者" %><br>
+            <%= f.select :user_id, options_for_select(@document.project.select_menber_list, @document.user_id),{ }, {id: "", class: "form-textbox"} %>
+          </div>
+
+          <div class="form-field">
+            <p>作成日<span class="note-text">※作成日は変更できません。</span><br>
+            <span class="display-textbox"><%= @document.created_at.to_date %></span></p>
+          </div>
+
+          <div class="form-action">
+            <%= f.submit "更新", class: "btn green-color" %>
+          </div>
+
+        <% end %>
+
+        <div class="form-action">
+          <%= link_to "戻る", project_path(@document.project_id), method: :get, class: "btn blue-color" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

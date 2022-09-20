@@ -19,6 +19,7 @@ ja:
       parent_task: 親タスク
       project: プロジェクト
       project_member: プロジェクトメンバー
+      document: 資料
     attributes:
       child_task:
         parent_task_id: 親タスクID
@@ -49,6 +50,14 @@ ja:
         user_id: オーナーユーザーID
         title: タイトル
         description: 説明
+        created_at: 登録日
+        updated_at: 更新日
+      document:
+        user_id: ユーザーID
+        project_id: プロジェクトID
+        title: タイトル
+        description: 説明
+        url: URL
         created_at: 登録日
         updated_at: 更新日
     errors:

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :projects
   has_many :project_members
   has_many :child_tasks
+  has_many :documents
 
   has_one_attached :profile_image
 
