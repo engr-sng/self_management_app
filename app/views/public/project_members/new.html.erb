@@ -11,8 +11,7 @@
         <%= form_with model: @project_member_new, url: project_project_members_path(@project.id), local: true, method: :post do |f| %>
           <div class="form-field">
             <%= f.label :user_name, "ユーザーネーム" %><br>
-            <%= f.text_field :user_name, class: "form-textbox" %>
-            <%= f.hidden_field :project_id, value: @project.id %>
+            <%= f.text_field :user_name, id: "keyword", class: "form-textbox" %>
           </div>
 
           <div class="form-action">
@@ -28,3 +27,11 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function () {
+  $("#keyword").autocomplete({
+    source: <%== @users %>
+  });
+});
+</script>

@@ -6,12 +6,13 @@ class Public::ProjectMembersController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @project_member_new = ProjectMember.new
+    @users = User.where(is_deleted: false).pluck(:user_name)
   end
 
   def create
     @project_member_new = ProjectMember.new
     @user = User.find_by(user_name: params[:project_member][:user_name])
-    @project = Project.find(params[:project_member][:project_id])
+    @project = Project.find(params[:project_id])
 
     if @user.nil?
       flash[:alert] = "選択したユーザーは存在しません。"
