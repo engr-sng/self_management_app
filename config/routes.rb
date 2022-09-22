@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
+      patch '/child_tasks/:id/select_update', to: "child_tasks#select_update", as: "child_task_select_update"
       resources :project_members, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :documents, only: [:show, :new, :create, :edit, :update, :destroy]
     end

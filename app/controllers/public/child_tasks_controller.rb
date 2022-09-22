@@ -71,6 +71,13 @@ class Public::ChildTasksController < ApplicationController
     end
   end
 
+  def select_update
+    @project = Project.find(params[:project_id])
+    @child_task = ChildTask.find(params[:id])
+    @child_task.update(child_task_params)
+    @child_task.update(progress: ChildTask.statuses[@child_task.status])
+  end
+
   def destroy
     @child_task = ChildTask.find(params[:id])
     @parent_task = @child_task.parent_task
