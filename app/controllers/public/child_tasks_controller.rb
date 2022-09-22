@@ -74,6 +74,7 @@ class Public::ChildTasksController < ApplicationController
   def select_update
     @project = Project.find(params[:project_id])
     @child_task = ChildTask.find(params[:id])
+    @project_member = ProjectMember.find_by(project_id: @project.id, user_id: @child_task.user_id)
     @child_task.update(child_task_params)
     @child_task.update(progress: ChildTask.statuses[@child_task.status])
   end

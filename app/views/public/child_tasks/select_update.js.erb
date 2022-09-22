@@ -1,2 +1,6 @@
 $("#child_task_<%= @child_task.id %>").html("<%= escape_javascript(render "public/projects/child_task_list", { child_task: @child_task }) %>");
-
+$("#parent_task_<%= @child_task.parent_task.id %>").html("<%= escape_javascript(render "public/projects/parent_task_list", { parent_task: @child_task.parent_task }) %>");
+$("#project_progress").html("<%= escape_javascript(render "public/projects/project_progress", { project: @project }) %>");
+$("#project_status").html("<%= escape_javascript(render "public/projects/project_status", { project: @project }) %>");
+$("#project_date").html("<%= escape_javascript(render "public/projects/project_date", { project: @project }) %>");
+$("#project_member_<%= @project_member.id %>").html("<%= escape_javascript(render "public/projects/project_member_progress", { project_member: @project_member }) %>");
