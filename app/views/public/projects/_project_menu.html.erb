@@ -1,0 +1,4 @@
+<ul class="search-list">
+  <li class="search-list-item"><i class="fa fa-file-lines"></i><%= link_to "ダッシュボード", project_path(project.id), method: :get %></li>
+  <li class="search-list-item"><i class="fa fa-calendar"></i><%= link_to "ガントチャート", project_gantt_chart_path(project.id), method: :get %></li>
+</ul>

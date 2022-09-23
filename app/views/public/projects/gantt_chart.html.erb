@@ -1,10 +1,7 @@
 <div class="wrapper">
   <div class="container flex-box">
     <div class="box-100">
-      <ul class="search-list">
-        <li class="search-list-item"><%= link_to "ダッシュボード", project_path(@project.id), method: :get %></li>
-        <li class="search-list-item"><%= link_to "ガントチャート", project_gantt_chart_path(@project.id), method: :get %></li>
-      </ul>
+      <%= render "public/projects/project_menu", { project: @project } %>
     </div>
 
     <div class="box-100">
@@ -51,10 +48,5 @@
       </div>
     </div>
 
-    <div class="box-100">
-      <div class='gantt-wrap'>
-        <svg id="gantt"></svg>
-      </div>
-    </div>
   </div>
 </div>

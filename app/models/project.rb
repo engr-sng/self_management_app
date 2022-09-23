@@ -98,7 +98,7 @@ class Project < ApplicationRecord
       parent_task_new = ParentTask.new(
         project_id: self.id,
         title: parent_task_array[parent_task_num - 1],
-        description: "#{parent_task_array[parent_task_num - 1]}の説明",
+        description: "",
         display_order: parent_task_num
       )
       parent_task_new.save
@@ -107,7 +107,7 @@ class Project < ApplicationRecord
         child_task_new = ChildTask.new(
           parent_task_id: parent_task_new.id,
           title: "#{parent_task_array[parent_task_num - 1]}の子タスク#{child_task_num}",
-          description: "#{parent_task_array[parent_task_num - 1]}の子タスク#{child_task_num}の説明",
+          description: "",
           start_date: start_date,
           end_date: end_date,
           display_order: child_task_num,

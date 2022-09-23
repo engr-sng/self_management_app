@@ -1,10 +1,7 @@
 <div class="wrapper">
   <div class="container flex-box">
     <div class="box-100">
-      <ul class="search-list">
-        <li class="search-list-item"><%= link_to "ダッシュボード", project_path(@project.id), method: :get %></li>
-        <li class="search-list-item"><%= link_to "ガントチャート", project_gantt_chart_path(@project.id), method: :get %></li>
-      </ul>
+      <%= render "public/projects/project_menu", { project: @project } %>
     </div>
 
     <div class="box-100">
@@ -70,7 +67,7 @@
           <tbody>
             <% @project.project_members.each do |project_member| %>
             <tr>
-              <td><%= link_to project_member.user.display_name, project_project_member_path(project_member.project.id,project_member.id), method: :get %></td>
+              <td><%= image_tag project_member.user.get_profile_image(12,12), class: "profile-icon" %><%= link_to project_member.user.display_name, project_project_member_path(project_member.project.id,project_member.id), method: :get %></td>
               <td><%= project_member.user.user_name %></td>
               <td><%= project_member.permission_i18n %></td>
               <td id="project_member_<%= project_member.id %>"><%= render "public/projects/project_member_progress", { project_member: project_member } %></td>

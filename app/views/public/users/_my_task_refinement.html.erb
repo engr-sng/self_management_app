@@ -6,6 +6,7 @@
               <th>終了日</th>
               <th>ステータス</th>
               <th>進捗率</th>
+              <th>担当者</th>
             </tr>
           </thead>
           <tbody>
@@ -17,6 +18,7 @@
               <td><%= my_task.end_date %></td>
               <td><%= my_task.status_i18n %></td>
               <td><%= my_task.progress %>%</td>
+              <td><%= my_task.user.display_name %></td>
             </tr>
             <% end %>
           <% end %>
