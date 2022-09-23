@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div class="container flex-box">
+    <div class="box-100">
+      <ul class="search-list">
+        <li class="search-list-item"><%= link_to "ダッシュボード", project_path(@project.id), method: :get %></li>
+        <li class="search-list-item"><%= link_to "ガントチャート", project_gantt_chart_path(@project.id), method: :get %></li>
+      </ul>
+    </div>
+
+    <div class="box-100">
+      <h2><%= @project.title %>のガントチャート</h2>
+    </div>
+
+    <div class="box-100">
+      <div class='gantt-wrap'>
+        <svg id="gantt"></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.onload = function() {
+  // タスク
+  var tasks = [
+    <% @project.parent_tasks.order(display_order: "ASC").each do |parent_task| %>
+    {
+    	id: 'parent_task_<%= parent_task.id %>',
+    	name: '<%= parent_task.title %>',
+    	description: '<%= parent_task.description %>',
+    	start: '<%= parent_task.parent_task_start_date %>',
+    	end: '<%= parent_task.parent_task_end_date %>',
+    	progress: <%= parent_task.parent_task_progress %>,
+    	dependencies: '',
+      custom_class: '',
+    },
+      <% parent_task.child_tasks.order(display_order: "ASC").each do |child_task| %>
+      {
+      	id: 'child_task_<%= child_task.id %>',
+      	name: '<%= child_task.title %>',
+      	description: '<%= child_task.description %>',
+      	start: '<%= child_task.start_date %>',
+      	end: '<%= child_task.end_date %>',
+      	progress: <%= child_task.progress %>,
+      	dependencies: 'parent_task_<%= child_task.parent_task.id %>',
+        custom_class: '',
+      },
+      <% end %>
+    <% end %>
+  ]
+  var gantt = new Gantt("#gantt", tasks);
+};
+
+</script>

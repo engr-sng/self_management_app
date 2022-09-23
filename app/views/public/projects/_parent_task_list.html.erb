@@ -1,5 +1,4 @@
-<td><%= parent_task.display_order %></td>
-<td><i class="fa fa-folder-open"></i><%= link_to parent_task.title, project_parent_task_path(parent_task.project.id,parent_task.id), method: :get %></td>
+<td><%= parent_task.display_order %>:<i class="fa fa-folder-open"></i><%= link_to parent_task.title, project_parent_task_path(parent_task.project.id,parent_task.id), method: :get %></td>
 <td><%= parent_task.parent_task_start_date %></td>
 <td><%= parent_task.parent_task_end_date %></td>
 <td><%= parent_task.parent_task_status %></td>

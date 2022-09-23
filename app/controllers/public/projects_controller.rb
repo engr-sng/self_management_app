@@ -3,6 +3,10 @@ class Public::ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_project_member, only: [:update, :edit, :destroy]
 
+  def gantt_chart
+    @project = Project.find(params[:project_id])
+  end
+
   def show
     @project = Project.find(params[:id])
   end

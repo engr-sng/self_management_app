@@ -1,6 +1,13 @@
 <div class="wrapper">
   <div class="container flex-box">
     <div class="box-100">
+      <ul class="search-list">
+        <li class="search-list-item"><%= link_to "ダッシュボード", project_path(@project.id), method: :get %></li>
+        <li class="search-list-item"><%= link_to "ガントチャート", project_gantt_chart_path(@project.id), method: :get %></li>
+      </ul>
+    </div>
+
+    <div class="box-100">
       <h2><%= @project.title %></h2>
       <p><%= @project.description %></p>
     </div>
@@ -120,7 +127,6 @@
         <table class="gantt-chart">
           <thead>
             <tr>
-              <th>WBS</th>
               <th>タスク</th>
               <th>開始日</th>
               <th>終了日</th>
@@ -182,4 +188,74 @@ $(document).on('change', '.select-status', function() {
     console.log("----------");
   });
 });
+
+$(document).on('change', '.select-start-date', function() {
+
+  const get_url = $(this).parent().attr("action");
+  console.log(get_url);
+  const get_value = $(this).val();
+  console.log(get_value);
+
+  $.ajax({
+    url: get_url,
+    type: "PATCH",
+    data: { child_task: { start_date: get_value } }
+  })
+  .done(function(){
+    console.log("成功");
+  })
+  .fail(function(){
+    console.log("失敗");
+  })
+  .always(function(){
+    console.log("----------");
+  });
+});
+
+$(document).on('change', '.select-end-date', function() {
+
+  const get_url = $(this).parent().attr("action");
+  console.log(get_url);
+  const get_value = $(this).val();
+  console.log(get_value);
+
+  $.ajax({
+    url: get_url,
+    type: "PATCH",
+    data: { child_task: { end_date: get_value } }
+  })
+  .done(function(){
+    console.log("成功");
+  })
+  .fail(function(){
+    console.log("失敗");
+  })
+  .always(function(){
+    console.log("----------");
+  });
+});
+
+$(document).on('change', '.select-user', function() {
+
+  const get_url = $(this).parent().attr("action");
+  console.log(get_url);
+  const get_value = $(this).val();
+  console.log(get_value);
+
+  $.ajax({
+    url: get_url,
+    type: "PATCH",
+    data: { child_task: { user_id: get_value } }
+  })
+  .done(function(){
+    console.log("成功");
+  })
+  .fail(function(){
+    console.log("失敗");
+  })
+  .always(function(){
+    console.log("----------");
+  });
+});
+
 </script>

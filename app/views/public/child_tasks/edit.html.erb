@@ -42,7 +42,7 @@
 
           <div class="form-field">
             <%= f.label :user_id, "担当者" %><br>
-            <%= f.select :user_id, options_for_select(@child_task.project.select_menber_list, @child_task.project.user_id),{ }, {id: "", class: "form-textbox"} %>
+            <%= f.select :user_id, options_for_select(@child_task.project.select_menber_list, @child_task.user_id),{ }, {id: "", class: "form-textbox"} %>
           </div>
 
           <div class="form-field">

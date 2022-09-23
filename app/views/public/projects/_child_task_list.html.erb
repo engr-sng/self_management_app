@@ -1,14 +1,25 @@
-<td><%= child_task.parent_task.display_order %>-<%= child_task.display_order %></td>
-<td><i class="fa fa-right-from-bracket"></i><%= link_to child_task.title, project_child_task_path(child_task.project.id,child_task.id), method: :get %></td>
-<td><%= child_task.start_date %></td>
-<td><%= child_task.end_date %></td>
+<td><%= child_task.parent_task.display_order %>-<%= child_task.display_order %>:<i class="fa fa-right-from-bracket"></i><%= link_to child_task.title, project_child_task_path(child_task.project.id,child_task.id), method: :get %></td>
+<td>
+  <%= form_with model: child_task, url: project_child_task_select_update_path(child_task.project.id, child_task.id), local: false, method: :patch do |f| %>
+    <%= f.date_field :start_date, value: child_task.start_date, class: "form-textbox select-start-date" %>
+  <% end %>
+</td>
+<td>
+  <%= form_with model: child_task, url: project_child_task_select_update_path(child_task.project.id, child_task.id), local: false, method: :patch do |f| %>
+    <%= f.date_field :end_date, value: child_task.end_date, class: "form-textbox select-end-date" %>
+  <% end %>
+</td>
 <td>
   <%= form_with model: child_task, url: project_child_task_select_update_path(child_task.project.id, child_task.id), local: false, method: :patch do |f| %>
     <%= f.select :status, options_for_select(ChildTask.statuses_i18n.invert, child_task.status),{ }, {id: "", class: "form-textbox select-status"} %>
   <% end %>
 </td>
 <td><%= child_task.progress %>%</td>
-<td><%= child_task.user.display_name %></td>
+<td>
+  <%= form_with model: child_task, url: project_child_task_select_update_path(child_task.project.id, child_task.id), local: false, method: :patch do |f| %>
+    <%= f.select :user_id, options_for_select(child_task.project.select_menber_list, child_task.user_id),{ }, {id: "", class: "form-textbox select-user"} %>
+  <% end %>
+</td>
 <% if (child_task.project.project_start_date.class == Date) && (child_task.project.project_end_date.class == Date) %>
   <% (child_task.project.project_start_date..child_task.project.project_end_date).each do |day| %>
   <td class="<%= child_task.date_comparison(day) %>"></td>

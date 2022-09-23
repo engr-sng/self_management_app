@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     post '/my_project_refinement', to: "users#my_project_refinement", as: "my_project_refinement"
 
     resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
+      get '/gantt_chart', to: "projects#gantt_chart", as: "gantt_chart"
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       patch '/child_tasks/:id/select_update', to: "child_tasks#select_update", as: "child_task_select_update"
