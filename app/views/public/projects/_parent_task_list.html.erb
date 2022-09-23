@@ -4,8 +4,3 @@
 <td><%= parent_task.parent_task_status %></td>
 <td><%= parent_task.parent_task_progress %>%</td>
 <td></td>
-<% if (parent_task.project.project_start_date.class == Date) && (parent_task.project.project_end_date.class == Date) %>
-  <% (parent_task.project.project_start_date..parent_task.project.project_end_date).each do |day| %>
-  <td class="<%= parent_task.date_comparison(day) %>"></td>
-  <% end %>
-<% end %>

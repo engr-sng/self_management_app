@@ -8,7 +8,7 @@
     </div>
 
     <div class="box-100">
-      <h2><%= @project.title %></h2>
+      <h2><%= @project.title %>のダッシュボード</h2>
       <p><%= @project.description %></p>
     </div>
 
@@ -123,8 +123,8 @@
     </div>
 
     <div class="box-100">
-      <div class="gantt-chart-container">
-        <table class="gantt-chart">
+      <div class="table-container">
+        <table class="table">
           <thead>
             <tr>
               <th>タスク</th>
@@ -133,11 +133,6 @@
               <th>ステータス</th>
               <th>進捗率</th>
               <th>担当者</th>
-              <% if (@project.project_start_date.class == Date) && (@project.project_end_date.class == Date) %>
-                <% (@project.project_start_date..@project.project_end_date).each do |day| %>
-                <th><%= day.strftime("%m/%d") %></th>
-                <% end %>
-              <% end %>
             </tr>
           </thead>
 

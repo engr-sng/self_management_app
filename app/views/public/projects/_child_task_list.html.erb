@@ -20,8 +20,3 @@
     <%= f.select :user_id, options_for_select(child_task.project.select_menber_list, child_task.user_id),{ }, {id: "", class: "form-textbox select-user"} %>
   <% end %>
 </td>
-<% if (child_task.project.project_start_date.class == Date) && (child_task.project.project_end_date.class == Date) %>
-  <% (child_task.project.project_start_date..child_task.project.project_end_date).each do |day| %>
-  <td class="<%= child_task.date_comparison(day) %>"></td>
-  <% end %>
-<% end %>
