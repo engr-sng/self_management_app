@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="box-100">
+      <h2>親タスクの一括新規作成</h2>
+    </div>
+
+    <div class="box-100">
+      <div class="table-container">
+        <%= form_with url: project_parent_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル(最大32字)</th>
+              <th>説明(最大140字)</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @parent_task_bulk_new.each do |parent_task_new| %>
+            <%= fields_for "parent_task[]", parent_task_new do |parent_task_fields| %>
+            <tr>
+              <td><%= parent_task_fields.text_field :title, class: "form-textbox" %></td>
+              <td><%= parent_task_fields.text_area :description, class: "form-textbox" %></td>
+            </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+        <div class="form-action">
+          <%= f.submit "更新", class: "btn green-color" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="box-100">
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+  </div>
+</div>

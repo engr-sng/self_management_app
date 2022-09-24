@@ -12,9 +12,13 @@ Rails.application.routes.draw do
 
     resources :projects, only: [:show, :new, :create, :edit, :update, :destroy] do
       get '/gantt_chart', to: "projects#gantt_chart", as: "gantt_chart"
+      get '/parent_tasks/bulk_new', to: "parent_tasks#bulk_new", as: "parent_task_bulk_new"
+      post '/parent_tasks/bulk_create', to: "parent_tasks#bulk_create", as: "parent_task_bulk_create"
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
-      resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       patch '/child_tasks/:id/select_update', to: "child_tasks#select_update", as: "child_task_select_update"
+      get '/child_tasks/bulk_new', to: "child_tasks#bulk_new", as: "child_task_bulk_new"
+      post '/child_tasks/bulk_create', to: "child_tasks#bulk_create", as: "child_task_bulk_create"
+      resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :project_members, only: [:show, :new, :create, :edit, :update, :destroy]
       resources :documents, only: [:show, :new, :create, :edit, :update, :destroy]
     end

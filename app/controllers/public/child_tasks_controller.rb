@@ -96,6 +96,16 @@ class Public::ChildTasksController < ApplicationController
     end
   end
 
+  def bulk_new
+    default_child_task_count = 10
+    @project = Project.find(params[:project_id])
+    @child_task_bulk_new = default_child_task_count.times.map { ChildTask.new }
+  end
+
+  def bulk_create
+    time = Time.current
+  end
+
   private
 
   def child_task_params

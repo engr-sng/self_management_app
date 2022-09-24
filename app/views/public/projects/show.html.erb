@@ -151,7 +151,9 @@
 
     <div class="box-100">
       <%= link_to "親タスクを追加する", new_project_parent_task_path(@project.id), method: :get, class: "btn green-color" %>
+      <%= link_to "親タスクを一括追加する", project_parent_task_bulk_new_path(@project.id), method: :get, class: "btn blue-color" %>
       <%= link_to "子タスクを追加する", new_project_child_task_path(@project.id), method: :get, class: "btn green-color" %>
+      <%= link_to "子タスクを一括追加する", project_child_task_bulk_new_path(@project.id), method: :get, class: "btn blue-color" %>
     </div>
 
   </div>

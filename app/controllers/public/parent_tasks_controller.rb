@@ -64,6 +64,44 @@ class Public::ParentTasksController < ApplicationController
     end
   end
 
+  def bulk_new
+    default_parent_task_count = 5
+    @project = Project.find(params[:project_id])
+    @parent_task_bulk_new = default_parent_task_count.times.map { ParentTask.new }
+  end
+
+  def bulk_create
+    @project = Project.find(params[:project_id])
+    @parent_task_bulk_new = params.require(:parent_task)
+    @parent_task_bulk_new.each do |require_parent_task|
+      parent_task_new = ParentTask.new(require_parent_task.permit(:title,:description))
+      parent_task_new.project_id = @project.id
+      if @project.parent_tasks.pluck(:display_order).max.nil?
+        parent_task_new.display_order = 1
+      else
+        parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
+      end
+      parent_task_new.save
+    end
+
+#    @parent_task_bulk_new = params.require(:parent_task).each do |require_parent_task|
+#      parent_task_new = ParentTask.new(require_parent_task.permit(:title,:description))
+#      parent_task_new.project_id = @project.id
+#      parent_task_new.save
+#    end
+#    map { Account.new(permit(:title,:description)) }
+#    if @parent_task_bulk_new.each do |parent_task_new|
+#        parent_task_new.project_id = @project.id
+#        parent_task_new.save
+#      end
+      redirect_to project_path(@project.id)
+      flash[:notice] = "親タスクの一括新規作成に成功しました。"
+#    else
+#      flash[:alert] = "親タスクの一括新規作成に失敗しました。"
+#      render :bulk_new
+#    end
+  end
+
   private
 
   def parent_task_params

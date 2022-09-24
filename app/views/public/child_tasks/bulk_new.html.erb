@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="box-100">
+      <h2>子タスクの一括新規作成</h2>
+    </div>
+
+    <div class="box-100">
+      <div class="table-container">
+        <%= form_with url: project_child_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>関連親タスク</th>
+              <th>タイトル(最大32字)</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>担当者</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>関連親タスク</td>
+              <td>タイトル(最大32字)</td>
+              <td>開始日</td>
+              <td>終了日</td>
+              <td>担当者</td>
+            </tr>
+          </tbody>
+        </table>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="box-100">
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+  </div>
+</div>
