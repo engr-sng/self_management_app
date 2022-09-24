@@ -6,29 +6,36 @@
 
     <div class="box-100">
       <div class="table-container">
-        <%= form_with url: project_child_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
+        <%= form_with model: @child_task_bulk_new, url: project_child_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
         <table class="table">
           <thead>
             <tr>
-              <th>関連親タスク</th>
               <th>タイトル(最大32字)</th>
+              <th>関連親タスク</th>
               <th>開始日</th>
               <th>終了日</th>
               <th>担当者</th>
             </tr>
           </thead>
           <tbody>
+          <% @child_task_bulk_new.each do |child_task_new| %>
+            <%= fields_for "child_task[]", child_task_new do |child_task_fields| %>
             <tr>
-              <td>関連親タスク</td>
-              <td>タイトル(最大32字)</td>
-              <td>開始日</td>
-              <td>終了日</td>
-              <td>担当者</td>
+              <td><%= child_task_fields.text_field :title, class: "form-textbox" %></td>
+              <td><%= child_task_fields.select :parent_task_id, options_for_select(@project.select_parent_task_list),{ }, {id: "", class: "form-textbox"} %></td>
+              <td><%= child_task_fields.date_field :start_date, value: Date.today, class: "form-textbox" %></td>
+              <td><%= child_task_fields.date_field :end_date, value: Date.today.next_month, class: "form-textbox" %></td>
+              <td><%= child_task_fields.select :user_id, options_for_select(@project.select_menber_list, current_user.id),{ }, {id: "", class: "form-textbox"} %></td>
             </tr>
+            <% end %>
+          <% end %>
           </tbody>
         </table>
-        <% end %>
       </div>
+      <div class="form-action">
+        <%= f.submit "一括新規作成", class: "btn green-color" %>
+      </div>
+      <% end %>
     </div>
 
     <div class="box-100">

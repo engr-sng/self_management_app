@@ -97,13 +97,30 @@ class Public::ChildTasksController < ApplicationController
   end
 
   def bulk_new
-    default_child_task_count = 10
+    default_child_task_count = 8
     @project = Project.find(params[:project_id])
     @child_task_bulk_new = default_child_task_count.times.map { ChildTask.new }
   end
 
   def bulk_create
-    time = Time.current
+    @project = Project.find(params[:project_id])
+    @child_task_bulk_new = params.require(:child_task)
+    save_count = 0
+    @child_task_bulk_new.each do |require_child_task|
+      child_task_new = ChildTask.new(require_child_task.permit(:parent_task_id, :user_id, :title, :description, :start_date, :end_date))
+      if child_task_new.parent_task.child_tasks.pluck(:display_order).max.nil?
+        child_task_new.display_order = 1
+      else
+        child_task_new.display_order = (child_task_new.parent_task.child_tasks.pluck(:display_order).max + 1)
+      end
+
+      if child_task_new.save
+        save_count += 1
+      end
+    end
+
+    redirect_to project_path(@project.id)
+    flash[:notice] = "#{save_count}件の子タスクの一括新規作成に成功しました。"
   end
 
   private

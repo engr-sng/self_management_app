@@ -73,6 +73,7 @@ class Public::ParentTasksController < ApplicationController
   def bulk_create
     @project = Project.find(params[:project_id])
     @parent_task_bulk_new = params.require(:parent_task)
+    save_count = 0
     @parent_task_bulk_new.each do |require_parent_task|
       parent_task_new = ParentTask.new(require_parent_task.permit(:title,:description))
       parent_task_new.project_id = @project.id
@@ -81,25 +82,14 @@ class Public::ParentTasksController < ApplicationController
       else
         parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
       end
-      parent_task_new.save
+
+      if parent_task_new.save
+        save_count += 1
+      end
     end
 
-#    @parent_task_bulk_new = params.require(:parent_task).each do |require_parent_task|
-#      parent_task_new = ParentTask.new(require_parent_task.permit(:title,:description))
-#      parent_task_new.project_id = @project.id
-#      parent_task_new.save
-#    end
-#    map { Account.new(permit(:title,:description)) }
-#    if @parent_task_bulk_new.each do |parent_task_new|
-#        parent_task_new.project_id = @project.id
-#        parent_task_new.save
-#      end
-      redirect_to project_path(@project.id)
-      flash[:notice] = "親タスクの一括新規作成に成功しました。"
-#    else
-#      flash[:alert] = "親タスクの一括新規作成に失敗しました。"
-#      render :bulk_new
-#    end
+    redirect_to project_path(@project.id)
+    flash[:notice] = "#{save_count}件の親タスクの一括新規作成に成功しました。"
   end
 
   private
