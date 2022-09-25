@@ -411,20 +411,60 @@ h3 {
   width: 200px;
 }
 
-/* ガントチャートレイアウト */
-
-.gantt-chart-container {
-  overflow: scroll;
-  min-height: 300px;
+/* FrappeGantt（ガントチャートレイアウト） */
+.gantt-container {
   height: 80vh;
 }
 
-.gantt-chart > thead > tr > th:nth-child(1) {
-  width: 200px;
+.gantt .bar-label {
+  font-weight: 100;
+  line-height: 22px;
+  fill: white;
+  font-size: 12px !important;
 }
 
-.gantt-chart > thead > tr > th:nth-child(n+2) {
-  width: 60px;
+.gantt .today-highlight {
+  fill: #f9546b;
+}
+
+.gantt .grid-row {
+  fill: white;
+}
+
+.gantt .grid-row:nth-child(even) {
+  fill: #f5f5f5;
+}
+
+.PARENT_TASK g rect.bar {
+  fill: #8d99a6 !important;
+}
+
+.PARENT_TASK g rect.bar-progress {
+  fill: #4169e1 !important;
+}
+
+.CHILD_TASK g rect.bar {
+  fill: #8d99a6 !important;
+}
+
+.CHILD_TASK g rect.bar-progress {
+  fill: #32cd32 !important;
+}
+
+.details-container {
+  background-color: #0f131a !important;
+  padding: 6px;
+  border-radius: 3px;
+  width: 300px;
+  color: white;
+}
+
+.details-container p {
+  margin: 6px;
+}
+
+.popup-wrapper .pointer {
+  border-top-color: #0f131a !important;
 }
 
 /* 共通カラー */
@@ -443,18 +483,6 @@ h3 {
 
 .gray-color {
   background-color: #808080;
-}
-
-.milestone-color {
-  background-color: #ffffe0;
-}
-
-.parent-task-color {
-  background-color: #add8e6;
-}
-
-.child-task-color {
-  background-color: #90ee90;
 }
 
 /* バリデーションレイアウトキャンセル */
