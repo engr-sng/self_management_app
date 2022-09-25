@@ -137,6 +137,61 @@ class Public::ChildTasksController < ApplicationController
 
   end
 
+  def bulk_edit
+    @project = Project.find(params[:project_id])
+  end
+
+  def bulk_update
+    @project = Project.find(params[:project_id])
+    @child_task_bulk = params.require(:child_task)
+    update_count = 0
+    failure_count = 0
+    parent_task_change_count = 0
+
+    @child_task_bulk.each do |key,value|
+      child_task = ChildTask.find(key)
+      before_parent_task = child_task.parent_task
+
+      if child_task.update(value.permit(:parent_task_id, :user_id, :title, :description, :start_date, :end_date))
+        after_parent_task = child_task.parent_task
+        if before_parent_task.id != after_parent_task.id
+          if after_parent_task.child_tasks.pluck(:display_order).max.nil?
+            child_task.update(display_order: 1)
+          else
+            display_order_max = (after_parent_task.child_tasks.pluck(:display_order).max + 1)
+            child_task.update(display_order: display_order_max)
+          end
+          parent_task_change_count += 1
+        end
+        update_count += 1
+      else
+        failure_count += 1
+      end
+    end
+
+    if parent_task_change_count > 0
+      @project.parent_tasks.order(display_order: :ASC).each do |parent_task|
+        display_order_num = 0
+        parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
+          display_order_num += 1
+          child_task.update(display_order: display_order_num)
+        end
+      end
+    end
+
+    redirect_to project_path(@project.id)
+
+    if update_count > 0
+      flash[:notice] = "#{update_count}件の子タスクの更新に成功しました。"
+    end
+
+    if failure_count > 0
+      flash[:alert] = "#{failure_count}件の子タスクの更新に失敗しました。"
+    end
+
+  end
+
+
   def bulk_delete
     @project = Project.find(params[:project_id])
   end

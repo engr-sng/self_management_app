@@ -106,6 +106,37 @@ class Public::ParentTasksController < ApplicationController
 
   end
 
+  def bulk_edit
+    @project = Project.find(params[:project_id])
+  end
+
+  def bulk_update
+    @project = Project.find(params[:project_id])
+    @parent_task_bulk = params.require(:parent_task)
+    update_count = 0
+    failure_count = 0
+
+    @parent_task_bulk.each do |key,value|
+      parent_task = ParentTask.find(key)
+      if parent_task.update(value.permit(:title,:description))
+        update_count += 1
+      else
+        failure_count += 1
+      end
+    end
+
+    redirect_to project_path(@project.id)
+
+    if update_count > 0
+      flash[:notice] = "#{update_count}件の親タスクの更新に成功しました。"
+    end
+
+    if failure_count > 0
+      flash[:alert] = "#{failure_count}件の親タスクの更新に失敗しました。"
+    end
+
+  end
+
   def bulk_delete
     @project = Project.find(params[:project_id])
   end

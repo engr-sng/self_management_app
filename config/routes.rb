@@ -14,12 +14,16 @@ Rails.application.routes.draw do
       get '/gantt_chart', to: "projects#gantt_chart", as: "gantt_chart"
       get '/parent_tasks/bulk_new', to: "parent_tasks#bulk_new", as: "parent_task_bulk_new"
       post '/parent_tasks/bulk_create', to: "parent_tasks#bulk_create", as: "parent_task_bulk_create"
+      get '/parent_tasks/bulk_edit', to: "parent_tasks#bulk_edit", as: "parent_task_bulk_edit"
+      patch '/parent_tasks/bulk_update', to: "parent_tasks#bulk_update", as: "parent_task_bulk_update"
       get '/parent_tasks/bulk_delete', to: "parent_tasks#bulk_delete", as: "parent_task_bulk_delete"
       delete '/parent_tasks/bulk_destroy', to: "parent_tasks#bulk_destroy", as: "parent_task_bulk_destroy"
       resources :parent_tasks, only: [:show, :new, :create, :edit, :update, :destroy]
       patch '/child_tasks/:id/select_update', to: "child_tasks#select_update", as: "child_task_select_update"
       get '/child_tasks/bulk_new', to: "child_tasks#bulk_new", as: "child_task_bulk_new"
       post '/child_tasks/bulk_create', to: "child_tasks#bulk_create", as: "child_task_bulk_create"
+      get '/child_tasks/bulk_edit', to: "child_tasks#bulk_edit", as: "child_task_bulk_edit"
+      patch '/child_tasks/bulk_update', to: "child_tasks#bulk_update", as: "child_task_bulk_update"
       get '/child_tasks/bulk_delete', to: "child_tasks#bulk_delete", as: "child_task_bulk_delete"
       delete '/child_tasks/bulk_destroy', to: "child_tasks#bulk_destroy", as: "child_task_bulk_destroy"
       resources :child_tasks, only: [:show, :new, :create, :edit, :update, :destroy]

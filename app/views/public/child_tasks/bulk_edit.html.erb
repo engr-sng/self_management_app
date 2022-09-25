@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="box-100">
+      <h2>子タスクの一括編集</h2>
+    </div>
+
+    <div class="box-100">
+      <div class="table-container">
+        <%= form_with url: project_child_task_bulk_update_path(@project.id), local: true, method: :patch do |f| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル(最大32字)</th>
+              <th>説明(最大140字)</th>
+              <th>関連親タスク</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>担当者</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @project.parent_tasks.order(display_order: :ASC).each do |parent_task| %>
+            <% parent_task.child_tasks.order(display_order: :ASC).each do |child_task| %>
+              <%= fields_for "child_task[]", child_task do |child_task_fields| %>
+              <tr>
+                <td><%= child_task_fields.text_field :title, class: "form-textbox" %></td>
+                <td><%= child_task_fields.text_area :description, class: "form-textbox" %></td>
+                <td><%= child_task_fields.select :parent_task_id, options_for_select(@project.select_parent_task_list, child_task.parent_task_id),{ }, {id: "", class: "form-textbox"} %></td>
+                <td><%= child_task_fields.date_field :start_date, value: child_task.start_date, class: "form-textbox" %></td>
+                <td><%= child_task_fields.date_field :end_date, value: child_task.end_date, class: "form-textbox" %></td>
+                <td><%= child_task_fields.select :user_id, options_for_select(@project.select_menber_list, child_task.user_id),{ }, {id: "", class: "form-textbox"} %></td>
+              </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-action">
+        <%= f.submit "一括更新", class: "btn green-color" %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="box-100">
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+  </div>
+</div>

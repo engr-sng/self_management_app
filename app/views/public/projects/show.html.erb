@@ -152,11 +152,13 @@
     <div class="box-100">
       <%= link_to "親タスクを1件追加する", new_project_parent_task_path(@project.id), method: :get, class: "btn green-color" %>
       <%= link_to "親タスクを一括追加する", project_parent_task_bulk_new_path(@project.id), method: :get, class: "btn blue-color" %>
+      <%= link_to "親タスクを一括編集する", project_parent_task_bulk_edit_path(@project.id), method: :get, class: "btn green-color" %>
       <%= link_to "親タスクを一括削除する", project_parent_task_bulk_delete_path(@project.id), method: :get, class: "btn red-color" %>
     </div>
     <div class="box-100">
       <%= link_to "子タスクを1件追加する", new_project_child_task_path(@project.id), method: :get, class: "btn green-color" %>
       <%= link_to "子タスクを一括追加する", project_child_task_bulk_new_path(@project.id), method: :get, class: "btn blue-color" %>
+      <%= link_to "子タスクを一括編集する", project_child_task_bulk_edit_path(@project.id), method: :get, class: "btn green-color" %>
       <%= link_to "子タスクを一括削除する", project_child_task_bulk_delete_path(@project.id), method: :get, class: "btn red-color" %>
     </div>
 
