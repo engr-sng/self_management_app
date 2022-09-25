@@ -6,7 +6,7 @@ class ChildTask < ApplicationRecord
   has_one :project, through: :parent_task
 
   validates :parent_task_id, presence: true
-  validates :title, presence: true, length: {minimum: 2, maximum: 32}
+  validates :title, presence: true, length: {maximum: 32}
   validates :description, length: {maximum: 140}
   validates :start_date, presence: true
   validates :end_date, presence: true

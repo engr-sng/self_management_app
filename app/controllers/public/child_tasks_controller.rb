@@ -106,21 +106,35 @@ class Public::ChildTasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @child_task_bulk_new = params.require(:child_task)
     save_count = 0
-    @child_task_bulk_new.each do |require_child_task|
-      child_task_new = ChildTask.new(require_child_task.permit(:parent_task_id, :user_id, :title, :description, :start_date, :end_date))
-      if child_task_new.parent_task.child_tasks.pluck(:display_order).max.nil?
-        child_task_new.display_order = 1
-      else
-        child_task_new.display_order = (child_task_new.parent_task.child_tasks.pluck(:display_order).max + 1)
-      end
+    failure_count = 0
 
-      if child_task_new.save
-        save_count += 1
+    @child_task_bulk_new.each do |value|
+      child_task_new = ChildTask.new(value.permit(:parent_task_id, :user_id, :title, :description, :start_date, :end_date))
+      if child_task_new.title.present?
+        if child_task_new.parent_task.child_tasks.pluck(:display_order).max.nil?
+          child_task_new.display_order = 1
+        else
+          child_task_new.display_order = (child_task_new.parent_task.child_tasks.pluck(:display_order).max + 1)
+        end
+
+        if child_task_new.save
+          save_count += 1
+        else
+          failure_count += 1
+        end
       end
     end
 
     redirect_to project_path(@project.id)
-    flash[:notice] = "#{save_count}件の子タスクの一括新規作成に成功しました。"
+
+    if save_count > 0
+      flash[:notice] = "#{save_count}件の子タスクの一括新規作成に成功しました。"
+    end
+
+    if failure_count > 0
+      flash[:alert] = "#{failure_count}件の子タスクの一括新規作成に失敗しました。"
+    end
+
   end
 
   private

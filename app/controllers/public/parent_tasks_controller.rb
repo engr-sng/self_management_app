@@ -74,23 +74,36 @@ class Public::ParentTasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @parent_task_bulk_new = params.require(:parent_task)
     save_count = 0
+    failure_count = 0
 
     @parent_task_bulk_new.each do |value|
       parent_task_new = ParentTask.new(value.permit(:title,:description))
-      parent_task_new.project_id = @project.id
-      if @project.parent_tasks.pluck(:display_order).max.nil?
-        parent_task_new.display_order = 1
-      else
-        parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
-      end
+      if parent_task_new.title.present?
+        parent_task_new.project_id = @project.id
+        if @project.parent_tasks.pluck(:display_order).max.nil?
+          parent_task_new.display_order = 1
+        else
+          parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
+        end
 
-      if parent_task_new.save
-        save_count += 1
+        if parent_task_new.save
+          save_count += 1
+        else
+          failure_count += 1
+        end
       end
     end
 
     redirect_to project_path(@project.id)
-    flash[:notice] = "#{save_count}件の親タスクの一括新規作成に成功しました。"
+
+    if save_count > 0
+      flash[:notice] = "#{save_count}件の親タスクの一括新規作成に成功しました。"
+    end
+
+    if failure_count > 0
+      flash[:alert] = "#{failure_count}件の親タスクの一括新規作成に失敗しました。"
+    end
+
   end
 
   private

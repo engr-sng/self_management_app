@@ -6,7 +6,7 @@
 
     <div class="box-100">
       <div class="table-container">
-        <%= form_with model: @parent_task_bulk_new, url: project_parent_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
+        <%= form_with url: project_parent_task_bulk_create_path(@project.id), local: true, method: :post do |f| %>
         <table class="table">
           <thead>
             <tr>
