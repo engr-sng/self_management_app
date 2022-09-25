@@ -18,7 +18,7 @@ class Public::DocumentsController < ApplicationController
       redirect_to project_path(@document_new.project_id)
       flash[:notice] = "資料の新規作成に成功しました。"
     else
-      flash[:alert] = "資料の新規作成に失敗しました。"
+      flash.now[:alert] = "資料の新規作成に失敗しました。"
       render :new
     end
   end
@@ -34,7 +34,7 @@ class Public::DocumentsController < ApplicationController
       redirect_to project_path(@document.project_id)
       flash[:notice] = "資料の編集に成功しました。"
     else
-      flash[:alert] = "資料の編集に失敗しました。"
+      flash.now[:alert] = "資料の編集に失敗しました。"
       render :edit
     end
   end
@@ -46,7 +46,7 @@ class Public::DocumentsController < ApplicationController
       redirect_to project_path(@document.project_id)
       flash[:notice] = "資料の削除に成功しました。"
     else
-      flash[:alert] = "資料の削除に失敗しました。"
+      flash.now[:alert] = "資料の削除に失敗しました。"
       render :show
     end
 

@@ -23,7 +23,7 @@ class Public::ChildTasksController < ApplicationController
       redirect_to project_path(@child_task_new.project.id)
       flash[:notice] = "子タスクの新規作成に成功しました。"
     else
-      flash[:alert] = "子タスクの新規作成に失敗しました。"
+      flash.now[:alert] = "子タスクの新規作成に失敗しました。"
       render :new
     end
   end
@@ -66,7 +66,7 @@ class Public::ChildTasksController < ApplicationController
       redirect_to project_path(@child_task.project.id)
       flash[:notice] = "子タスクの更新に成功しました。"
     else
-      flash[:alert] = "子タスクの更新に失敗しました。"
+      flash.now[:alert] = "子タスクの更新に失敗しました。"
       render :edit
     end
   end
@@ -91,7 +91,7 @@ class Public::ChildTasksController < ApplicationController
       redirect_to project_path(@child_task.project.id)
       flash[:notice] = "子タスクの削除に成功しました。"
     else
-      flash[:alert] = "子タスクの削除に失敗しました。"
+      flash.now[:alert] = "子タスクの削除に失敗しました。"
       render :show
     end
   end
@@ -219,7 +219,7 @@ class Public::ChildTasksController < ApplicationController
       redirect_to project_path(@project.id)
       flash[:notice] = "#{destroy_count}件の子タスクの削除に成功しました。"
     else
-      flash[:alert] = "子タスクの削除に失敗しました。"
+      flash.now[:alert] = "子タスクの削除に失敗しました。"
       render :bulk_delete
     end
   end

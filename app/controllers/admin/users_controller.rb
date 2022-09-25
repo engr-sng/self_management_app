@@ -20,7 +20,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_user_path(@user.id)
       flash[:notice] = "プロフィールの更新に成功しました。"
     else
-      flash[:alert] = "プロフィールの更新に失敗しました。"
+      flash.now[:alert] = "プロフィールの更新に失敗しました。"
       render :edit
     end
   end

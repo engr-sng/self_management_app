@@ -22,7 +22,7 @@ class Public::UsersController < ApplicationController
       redirect_to my_page_path
       flash[:notice] = "プロフィールの更新に成功しました。"
     else
-      flash[:alert] = "プロフィールの更新に失敗しました。"
+      flash.now[:alert] = "プロフィールの更新に失敗しました。"
       render :edit
     end
   end
@@ -38,7 +38,7 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "退会処理の実行に成功しました"
       redirect_to root_path
     else
-      flash[:alert] = "退会処理の実行に失敗しました。"
+      flash.now[:alert] = "退会処理の実行に失敗しました。"
       render :confirm
     end
   end

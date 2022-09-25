@@ -15,10 +15,10 @@ class Public::ProjectMembersController < ApplicationController
     @project = Project.find(params[:project_id])
 
     if @user.nil?
-      flash[:alert] = "選択したユーザーは存在しません。"
+      flash.now[:alert] = "選択したユーザーは存在しません。"
       render :new
     elsif ProjectMember.find_by(user_id: @user.id, project_id: @project.id)
-      flash[:alert] = "選択したユーザーはすでにプロジェクトメンバーに追加されています。"
+      flash.now[:alert] = "選択したユーザーはすでにプロジェクトメンバーに追加されています。"
       render :new
     else
       @project_member_new = ProjectMember.new(
@@ -30,7 +30,7 @@ class Public::ProjectMembersController < ApplicationController
         redirect_to project_path(@project_member_new.project_id)
         flash[:notice] = "メンバーの追加に成功しました。"
       else
-        flash[:alert] = "メンバーの追加に失敗しました。"
+        flash.now[:alert] = "メンバーの追加に失敗しました。"
         render :new
       end
     end
@@ -48,13 +48,13 @@ class Public::ProjectMembersController < ApplicationController
     @project_member = ProjectMember.find(params[:id])
 
     if @project_member.user_id == @project_member.project.user_id
-      flash[:alert] = "プロジェクトオーナーの権限は変更できません。"
+      flash.now[:alert] = "プロジェクトオーナーの権限は変更できません。"
       render :edit
     elsif @project_member.update(project_member_params)
       redirect_to project_path(@project_member.project.id)
       flash[:notice] = "プロジェクトメンバーの更新に成功しました。"
     else
-      flash[:alert] = "プロジェクトメンバーの更新に失敗しました。"
+      flash.now[:alert] = "プロジェクトメンバーの更新に失敗しました。"
       render :edit
     end
   end
@@ -63,7 +63,7 @@ class Public::ProjectMembersController < ApplicationController
     @project_member = ProjectMember.find(params[:id])
 
     if @project_member.user_id == @project_member.project.user_id
-      flash[:alert] = "プロジェクトオーナーは削除できません。"
+      flash.now[:alert] = "プロジェクトオーナーは削除できません。"
       render :show
     elsif @project_member.destroy
       @project_member.project.child_tasks.where(user_id: @project_member.user_id).each do |child_task|
@@ -72,7 +72,7 @@ class Public::ProjectMembersController < ApplicationController
       redirect_to project_path(@project_member.project.id)
       flash[:notice] = "プロジェクトメンバーの削除に成功しました。"
     else
-      flash[:alert] = "プロジェクトメンバーの削除に失敗しました。"
+      flash.now[:alert] = "プロジェクトメンバーの削除に失敗しました。"
       render :show
     end
   end
