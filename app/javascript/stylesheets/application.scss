@@ -314,6 +314,15 @@ h3 {
   width: 100%;
 }
 
+/* チェックボックスレイアウト */
+.control__indicator {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  margin: 0 10px 0 0;
+  background: #E6E6E6;
+}
+
 /* アイコンレイアウト */
 
 .fa {

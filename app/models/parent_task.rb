@@ -5,7 +5,7 @@ class ParentTask < ApplicationRecord
   has_many :child_tasks, dependent: :destroy
 
   validates :project_id, presence: true
-  validates :title, presence: true, length: {minimum: 2, maximum: 32}
+  validates :title, presence: true, length: {maximum: 32}
   validates :description, length: {maximum: 140}
 
   def date_comparison(day)

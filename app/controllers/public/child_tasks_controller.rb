@@ -137,6 +137,38 @@ class Public::ChildTasksController < ApplicationController
 
   end
 
+  def bulk_delete
+    @project = Project.find(params[:project_id])
+  end
+
+  def bulk_destroy
+    @project = Project.find(params[:project_id])
+    checked_data = params[:deletes]
+    destroy_count = 0
+
+    checked_data.each do |key,value|
+      if value.to_i == 1
+        ChildTask.find(key).destroy
+        destroy_count += 1
+      end
+    end
+
+    if destroy_count > 0
+      @project.parent_tasks.order(display_order: :ASC).each do |parent_task|
+        display_order_num = 0
+        parent_task.child_tasks.order(display_order: :ASC).each do |child_task|
+          display_order_num += 1
+          child_task.update(display_order: display_order_num)
+        end
+      end
+      redirect_to project_path(@project.id)
+      flash[:notice] = "#{destroy_count}件の子タスクの削除に成功しました。"
+    else
+      flash[:alert] = "子タスクの削除に失敗しました。"
+      render :bulk_delete
+    end
+  end
+
   private
 
   def child_task_params

@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="box-100">
+      <h2>子タスクの一括削除</h2>
+    </div>
+
+    <div class="box-100">
+      <div class="table-container">
+        <%= form_with url: project_child_task_bulk_destroy_path(@project.id), local: true, method: :delete do |f| %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>開始日</th>
+              <th>終了日</th>
+              <th>ステータス</th>
+              <th>進捗率</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @project.parent_tasks.order(display_order: :ASC).each do |parent_task| %>
+            <% parent_task.child_tasks.order(display_order: :ASC).each do |child_task| %>
+              <tr>
+                <td><%= f.check_box "deletes[#{child_task.id}]", id: child_task.id, class: "control__indicator" %><%= link_to child_task.title, project_child_task_path(child_task.project.id,child_task.id), method: :get %></td>
+                <td><%= child_task.start_date %></td>
+                <td><%= child_task.end_date %></td>
+                <td><%= child_task.status_i18n %></td>
+                <td><%= child_task.progress %>%</td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-action">
+        <%= f.submit "一括削除", class: "btn red-color" %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="box-100">
+      <div class="form-action">
+        <%= link_to "戻る", project_path(@project.id), method: :get, class: "btn blue-color" %>
+      </div>
+    </div>
+  </div>
+</div>
