@@ -74,8 +74,9 @@ class Public::ParentTasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @parent_task_bulk_new = params.require(:parent_task)
     save_count = 0
-    @parent_task_bulk_new.each do |require_parent_task|
-      parent_task_new = ParentTask.new(require_parent_task.permit(:title,:description))
+
+    @parent_task_bulk_new.each do |value|
+      parent_task_new = ParentTask.new(value.permit(:title,:description))
       parent_task_new.project_id = @project.id
       if @project.parent_tasks.pluck(:display_order).max.nil?
         parent_task_new.display_order = 1
