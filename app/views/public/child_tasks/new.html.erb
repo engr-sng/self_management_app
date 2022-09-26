@@ -21,7 +21,7 @@
           </div>
 
           <div class="form-field">
-            <%= f.label :parent_task_id, "親タスク" %><br>
+            <%= f.label :parent_task_id, "関連親タスク" %><br>
             <%= f.select :parent_task_id, options_for_select(@project.select_parent_task_list),{ }, {id: "", class: "form-textbox"} %>
           </div>
 

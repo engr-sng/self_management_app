@@ -11,7 +11,8 @@ class Public::ProjectMembersController < ApplicationController
 
   def create
     @project_member_new = ProjectMember.new
-    @user = User.find_by(user_name: params[:project_member][:user_name])
+    @users = User.where(is_deleted: false).pluck(:user_name)
+    @user = User.find_by(user_name: params[:project_member][:user_name], is_deleted: false)
     @project = Project.find(params[:project_id])
 
     if @user.nil?
@@ -21,13 +22,11 @@ class Public::ProjectMembersController < ApplicationController
       flash.now[:alert] = "選択したユーザーはすでにプロジェクトメンバーに追加されています。"
       render :new
     else
-      @project_member_new = ProjectMember.new(
-        user_id: @user.id,
-        project_id: @project.id,
-        permission: 0
-        )
+      @project_member_new.user_id = @user.id
+      @project_member_new.project_id = @project.id
+      @project_member_new.permission = 0
       if @project_member_new.save
-        redirect_to project_path(@project_member_new.project_id)
+        redirect_to project_path(@project_member_new.project.id)
         flash[:notice] = "メンバーの追加に成功しました。"
       else
         flash.now[:alert] = "メンバーの追加に失敗しました。"
@@ -80,7 +79,7 @@ class Public::ProjectMembersController < ApplicationController
   private
 
   def project_member_params
-    params.require(:project_member).permit(:user_id,:project_id,:permission)
+    params.require(:project_member).permit(:user_id, :project_id, :permission)
   end
 
   def ensure_project_member

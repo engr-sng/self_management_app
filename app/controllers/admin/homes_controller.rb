@@ -4,15 +4,16 @@ class Admin::HomesController < ApplicationController
 
   def top
     @users = User.all
+    all_user = @users.count
     invalid_user = @users.where(is_deleted: true).count
     valid_user = @users.where(is_deleted: false).count
 
-    if @users.where(is_deleted: true).count == 0
+    if invalid_user == 0
       @withdrawal_rate = 0
-    elsif @users.where(is_deleted: false).count == 0
+    elsif valid_user == 0
       @withdrawal_rate = 0
     else
-      @withdrawal_rate = ((invalid_user*100)/valid_user)
+      @withdrawal_rate = ((invalid_user*100)/all_user).floor
     end
   end
 end

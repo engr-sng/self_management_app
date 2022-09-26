@@ -41,11 +41,11 @@
         </div>
 
         <div class="form-action">
-          <%= link_to "削除", project_document_path(@document.project_id, @document.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+          <%= link_to "削除", project_document_path(@document.project.id, @document.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
         </div>
 
         <div class="form-action">
-          <%= link_to "戻る", project_path(@document.project_id), method: :get, class: "btn blue-color" %>
+          <%= link_to "戻る", project_path(@document.project.id), method: :get, class: "btn blue-color" %>
         </div>
       </div>
     </div>

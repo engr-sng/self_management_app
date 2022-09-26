@@ -5,26 +5,20 @@
     </div>
 
     <div class="box-100">
-      <div class="table-container">
-        <%= form_with url: project_parent_task_bulk_destroy_path(@project.id), local: true, method: :delete do |f| %>
+      <div class="narrow-table-container">
+        <%= form_with url: project_parent_task_bulk_destroy_path(@project.id), data: { confirm: "本当に削除しますか？" }, local: true, method: :delete do |f| %>
         <table class="table">
           <thead>
             <tr>
               <th>タイトル</th>
-              <th>開始日</th>
-              <th>終了日</th>
-              <th>ステータス</th>
-              <th>進捗率</th>
+              <th>説明</th>
             </tr>
           </thead>
           <tbody>
           <% @project.parent_tasks.order(display_order: :ASC).each do |parent_task| %>
             <tr>
               <td><%= f.check_box "deletes[#{parent_task.id}]", id: parent_task.id, class: "control__indicator" %><%= link_to parent_task.title, project_parent_task_path(parent_task.project.id,parent_task.id), method: :get %></td>
-              <td><%= parent_task.parent_task_start_date %></td>
-              <td><%= parent_task.parent_task_end_date %></td>
-              <td><%= parent_task.parent_task_status %></td>
-              <td><%= parent_task.parent_task_progress %>%</td>
+              <td><%= parent_task.description %></td>
             </tr>
           <% end %>
           </tbody>

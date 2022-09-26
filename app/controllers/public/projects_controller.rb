@@ -38,7 +38,8 @@ class Public::ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     before_project_owner = @project.user_id
     if @project.update(project_params)
-      if before_project_owner != @project.user_id
+      after_project_owner = @project.user_id
+      if before_project_owner != after_project_owner
         project_owner = ProjectMember.find_by(project_id: @project.id, user_id: @project.user_id)
         project_owner.update(permission: 20)
       end
@@ -64,7 +65,7 @@ class Public::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:user_id,:title,:description)
+    params.require(:project).permit(:user_id, :title, :description)
   end
 
   def ensure_project_member

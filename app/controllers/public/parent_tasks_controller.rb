@@ -12,12 +12,7 @@ class Public::ParentTasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @parent_task_new = ParentTask.new(parent_task_params)
     @parent_task_new.project_id = @project.id
-
-    if @project.parent_tasks.pluck(:display_order).max.nil?
-      @parent_task_new.display_order = 1
-    else
-      @parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
-    end
+    @parent_task_new.display_order = @project.have_parent_task_get_max_display_order
 
     if @parent_task_new.save
       redirect_to project_path(@parent_task_new.project.id)
@@ -42,21 +37,17 @@ class Public::ParentTasksController < ApplicationController
       redirect_to project_path(@parent_task.project.id)
       flash[:notice] = "親タスクの更新に成功しました。"
     else
-      flash.now[:alert] = "親の更新に失敗しました。"
+      flash.now[:alert] = "親タスクの更新に失敗しました。"
       render :edit
     end
   end
 
   def destroy
     @parent_task = ParentTask.find(params[:id])
-    @project = @parent_task.project
-    display_order_num = 0
+    project = @parent_task.project
     if @parent_task.destroy
-      @project.parent_tasks.order(display_order: :ASC).each do |parent_task|
-        display_order_num += 1
-        parent_task.update(display_order: display_order_num)
-      end
-      redirect_to project_path(@parent_task.project.id)
+      project.have_parent_task_display_number_again
+      redirect_to project_path(project.id)
       flash[:notice] = "親タスクの削除に成功しました。"
     else
       flash.now[:alert] = "親タスクの削除に失敗しました。"
@@ -72,22 +63,18 @@ class Public::ParentTasksController < ApplicationController
 
   def bulk_create
     @project = Project.find(params[:project_id])
-    @parent_task_bulk_new = params.require(:parent_task)
-    save_count = 0
+    @parent_task_bulk_new = parent_task_require
+    success_count = 0
     failure_count = 0
 
     @parent_task_bulk_new.each do |value|
-      parent_task_new = ParentTask.new(value.permit(:title,:description))
+      parent_task_new = ParentTask.new(parent_task_permit(value))
       if parent_task_new.title.present?
         parent_task_new.project_id = @project.id
-        if @project.parent_tasks.pluck(:display_order).max.nil?
-          parent_task_new.display_order = 1
-        else
-          parent_task_new.display_order = (@project.parent_tasks.pluck(:display_order).max + 1)
-        end
+        parent_task_new.display_order = @project.have_parent_task_get_max_display_order
 
         if parent_task_new.save
-          save_count += 1
+          success_count += 1
         else
           failure_count += 1
         end
@@ -96,12 +83,12 @@ class Public::ParentTasksController < ApplicationController
 
     redirect_to project_path(@project.id)
 
-    if save_count > 0
-      flash[:notice] = "#{save_count}件の親タスクの一括新規作成に成功しました。"
+    if success_count > 0
+      flash[:notice] = "#{success_count}件の親タスクの新規作成に成功しました。"
     end
 
     if failure_count > 0
-      flash[:alert] = "#{failure_count}件の親タスクの一括新規作成に失敗しました。"
+      flash[:alert] = "#{failure_count}件の親タスクの新規作成に失敗しました。"
     end
 
   end
@@ -112,14 +99,14 @@ class Public::ParentTasksController < ApplicationController
 
   def bulk_update
     @project = Project.find(params[:project_id])
-    @parent_task_bulk = params.require(:parent_task)
-    update_count = 0
+    @parent_task_bulk = parent_task_require
+    success_count = 0
     failure_count = 0
 
     @parent_task_bulk.each do |key,value|
       parent_task = ParentTask.find(key)
-      if parent_task.update(value.permit(:title,:description))
-        update_count += 1
+      if parent_task.update(parent_task_permit(value))
+        success_count += 1
       else
         failure_count += 1
       end
@@ -127,8 +114,8 @@ class Public::ParentTasksController < ApplicationController
 
     redirect_to project_path(@project.id)
 
-    if update_count > 0
-      flash[:notice] = "#{update_count}件の親タスクの更新に成功しました。"
+    if success_count > 0
+      flash[:notice] = "#{success_count}件の親タスクの更新に成功しました。"
     end
 
     if failure_count > 0
@@ -144,23 +131,20 @@ class Public::ParentTasksController < ApplicationController
   def bulk_destroy
     @project = Project.find(params[:project_id])
     checked_data = params[:deletes]
-    destroy_count = 0
+    success_count = 0
     display_order_num = 0
 
     checked_data.each do |key,value|
       if value.to_i == 1
         ParentTask.find(key).destroy
-        destroy_count += 1
+        success_count += 1
       end
     end
 
-    if destroy_count > 0
-      @project.parent_tasks.order(display_order: :ASC).each do |parent_task|
-        display_order_num += 1
-        parent_task.update(display_order: display_order_num)
-      end
+    if success_count > 0
+      @project.have_parent_task_display_number_again
       redirect_to project_path(@project.id)
-      flash[:notice] = "#{destroy_count}件の親タスクの削除に成功しました。"
+      flash[:notice] = "#{success_count}件の親タスクの削除に成功しました。"
     else
       flash.now[:alert] = "親タスクの削除に失敗しました。"
       render :bulk_delete
@@ -170,7 +154,15 @@ class Public::ParentTasksController < ApplicationController
   private
 
   def parent_task_params
-    params.require(:parent_task).permit(:project_id,:title,:description,:display_order)
+    params.require(:parent_task).permit(:project_id, :title, :description, :display_order)
+  end
+
+  def parent_task_require
+    params.require(:parent_task)
+  end
+
+  def parent_task_permit(value)
+    value.permit(:project_id, :title, :description, :display_order)
   end
 
   def ensure_project_member

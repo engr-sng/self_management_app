@@ -85,6 +85,22 @@ class Project < ApplicationRecord
     end
   end
 
+  def have_parent_task_get_max_display_order
+    if self.parent_tasks.pluck(:display_order).max.nil?
+      1
+    else
+      self.parent_tasks.pluck(:display_order).max + 1
+    end
+  end
+
+  def have_parent_task_display_number_again
+    display_order_num = 0
+    self.parent_tasks.order(display_order: :ASC).each do |parent_task|
+      display_order_num += 1
+      parent_task.update(display_order: display_order_num)
+    end
+  end
+
   def initial_project_format(start_date,end_date)
     project_member_new = ProjectMember.new(
       user_id: self.user_id,

@@ -6,7 +6,7 @@
       </div>
 
       <div class="box-100">
-        <%= form_with model: @project_member, url: project_project_member_path(@project_member.project_id, @project_member.id), local: true, method: :patch do |f| %>
+        <%= form_with model: @project_member, url: project_project_member_path(@project_member.project.id, @project_member.id), local: true, method: :patch do |f| %>
           <div class="form-field">
             <%= image_tag @project_member.user.get_profile_image(300,300), class: "profile-image" %>
           </div>
@@ -31,7 +31,7 @@
           </div>
 
           <div class="form-action">
-            <%= link_to "戻る", project_path(@project_member.project_id), method: :get, class: "btn blue-color" %>
+            <%= link_to "戻る", project_path(@project_member.project.id), method: :get, class: "btn blue-color" %>
           </div>
         <% end %>
       </div>

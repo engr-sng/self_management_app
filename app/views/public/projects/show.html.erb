@@ -67,7 +67,7 @@
           <tbody>
             <% @project.project_members.each do |project_member| %>
             <tr>
-              <td><%= image_tag project_member.user.get_profile_image(12,12), class: "profile-icon" %><%= link_to project_member.user.display_name, project_project_member_path(project_member.project.id,project_member.id), method: :get %></td>
+              <td><%= image_tag project_member.user.get_profile_image(15,15), class: "profile-icon" %><%= link_to project_member.user.display_name, project_project_member_path(project_member.project.id,project_member.id), method: :get %></td>
               <td><%= project_member.user.user_name %></td>
               <td><%= project_member.permission_i18n %></td>
               <td id="project_member_<%= project_member.id %>"><%= render "public/projects/project_member_progress", { project_member: project_member } %></td>
@@ -83,7 +83,7 @@
     </div>
 
     <div class="box-100">
-      <h2>資料一覧</h2>
+      <h2>プロジェクト資料一覧</h2>
     </div>
 
     <div class="box-100">
@@ -116,7 +116,7 @@
     </div>
 
     <div class="box-100">
-      <h2>タスク一覧</h2>
+      <h2>プロジェクトタスク一覧</h2>
     </div>
 
     <div class="box-100">

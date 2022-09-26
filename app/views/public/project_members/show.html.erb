@@ -26,15 +26,15 @@
         </div>
 
         <div class="form-action">
-          <%= link_to "編集", edit_project_project_member_path(@project_member.project_id, @project_member.id), method: :get, class: "btn green-color" %>
+          <%= link_to "編集", edit_project_project_member_path(@project_member.project.id, @project_member.id), method: :get, class: "btn green-color" %>
         </div>
 
         <div class="form-action">
-          <%= link_to "削除", project_project_member_path(@project_member.project_id, @project_member.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
+          <%= link_to "削除", project_project_member_path(@project_member.project.id, @project_member.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "btn red-color" %>
         </div>
 
         <div class="form-action">
-          <%= link_to "戻る", project_path(@project_member.project_id), method: :get, class: "btn blue-color" %>
+          <%= link_to "戻る", project_path(@project_member.project.id), method: :get, class: "btn blue-color" %>
         </div>
       </div>
     </div>

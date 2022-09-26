@@ -16,6 +16,14 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :is_deleted, inclusion: [true, false]
 
+  def self.have_editor_authority(project_id, user_id)
+    ProjectMember.permissions[ProjectMember.find_by(project_id: project_id, user_id: user_id).permission] >= 10
+  end
+
+  def self.have_administrator_authority(project_id, user_id)
+    ProjectMember.permissions[ProjectMember.find_by(project_id: project_id, user_id: user_id).permission] >= 20
+  end
+
   def check_deleted
     if self.is_deleted
       "無効"

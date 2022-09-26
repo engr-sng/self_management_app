@@ -62,4 +62,19 @@ class ParentTask < ApplicationRecord
     end
   end
 
+  def have_child_task_get_max_display_order
+    if self.child_tasks.pluck(:display_order).max.nil?
+      1
+    else
+      self.child_tasks.pluck(:display_order).max + 1
+    end
+  end
+
+  def have_child_task_display_number_again
+    display_order_num = 0
+    self.child_tasks.order(display_order: :ASC).each do |child_task|
+      display_order_num += 1
+      child_task.update(display_order: display_order_num)
+    end
+  end
 end
