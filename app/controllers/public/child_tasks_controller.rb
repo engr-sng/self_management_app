@@ -1,7 +1,7 @@
 class Public::ChildTasksController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :ensure_project_member, only: [:new, :create, :edit, :update, :destroy,:bulk_new, :bulk_create, :bulk_edit, :bulk_update, :bulk_delete, :bulk_destroy]
+  before_action :ensure_project_member, only: [:new, :create, :edit, :update, :destroy, :select_update, :bulk_new, :bulk_create, :bulk_edit, :bulk_update, :bulk_delete, :bulk_destroy]
 
   def new
     @project = Project.find(params[:project_id])
