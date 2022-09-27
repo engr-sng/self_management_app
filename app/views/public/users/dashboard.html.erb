@@ -90,7 +90,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @user.documents.each do |document| %>
+            <% @user.documents.reverse.each do |document| %>
             <tr>
               <td><%= link_to document.title, project_document_path(document.project.id,document.id), method: :get %></td>
               <td><%= link_to document.url, document.url, target: :_blank, rel: "noopener noreferrer" %></td>

@@ -10,7 +10,7 @@
             </tr>
           </thead>
           <tbody>
-          <% user.child_tasks.each do |my_task| %>
+          <% user.child_tasks.reverse.each do |my_task| %>
             <% if my_task.child_task_refinement(refinement) %>
             <tr>
               <td><%= link_to my_task.title, project_child_task_path(my_task.project.id,my_task.id), method: :get %></td>
