@@ -21,21 +21,24 @@ BacklogやRedmine、Wrikeなど組織でタスク管理やプロジェクト管�
 
 ## 設計書
 ### ER図
-※作成中※
+![SelfManagementApp](https://user-images.githubusercontent.com/108569722/197373138-c833b0c0-7ed8-414d-bb92-fcc41f39508b.jpg)
 
 ### テーブル設計書
-※作成中※
+https://docs.google.com/spreadsheets/d/1pgQAVF10C0rT_JnunxAq1LUdnzEhIPUocxz52LdrHoE/edit?usp=sharing
 
 ### アプリケーション詳細設計書
-※作成中※
+https://docs.google.com/spreadsheets/d/1uBKobr93xndEKkWIYH4M1-Fedm8-2MRrhtN4Eu9t7WY/edit?usp=sharing
 
 ## 開発環境
-- OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
-- Gem：devise,enum_help,Active Storage
-- JSライブラリ：jQuery,Chart.js
-- IDE：Cloud9
+- OS
+  - Linux(CentOS)
+- 言語・フレームワーク・ライブラリ・データベース
+  - HTML / SCSS / JavaScript / JQuery / Ruby / Ruby on Rails / MySQLなど
+- インフラ
+  - AWS(Cloud9 / EC2 / EBS / RDS / VPC　/ EIP / ALB /　Route 53 / CloudWatch / S3) 
+  - Nginx など
+- その他ツール
+  - Slack / GitHub / GitHub Actions / cron(バッチ処理)
 
 ## 使用素材
 - FontAwesome(https://fontawesome.com/)
